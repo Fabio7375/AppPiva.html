@@ -61,12 +61,21 @@
             box-shadow: 0 2px 8px rgba(0,0,0,0.1);
         }
 
+        /* --- MODIFICA CHIAVE PER LA RIGA UNICA --- */
         .category-selector {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            display: flex; /* Cambiato da grid a flex */
             gap: 16px;
             margin-bottom: 40px;
+            overflow-x: auto; /* Aggiunto per lo scroll orizzontale */
+            padding-bottom: 16px; /* Spazio per la scrollbar (anche se nascosta) */
+            /* Nasconde la scrollbar ma mantiene la funzionalità */
+            -ms-overflow-style: none;  /* IE and Edge */
+            scrollbar-width: none;  /* Firefox */
         }
+        .category-selector::-webkit-scrollbar {
+            display: none; /* Chrome, Safari, and Opera */
+        }
+        /* --- FINE MODIFICA --- */
 
         .category-card {
             background: white;
@@ -77,6 +86,8 @@
             transition: all 0.2s ease;
             box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1), 0 1px 2px rgba(0, 0, 0, 0.06);
             border: 1px solid #f3f4f6;
+            /* Aggiunto per mantenere la dimensione corretta in un layout flex */
+            flex: 0 0 280px; 
         }
 
         .category-card:hover {
@@ -132,6 +143,7 @@
             display: flex;
             margin-bottom: 32px;
             border-bottom: 1px solid #e5e7eb;
+            flex-wrap: wrap;
         }
 
         .tab {
@@ -368,37 +380,15 @@
         }
         
         @media (max-width: 768px) {
-            .header h1 { 
-                font-size: 2rem; 
-            }
-            
-            .tabs { 
-                flex-direction: column; 
-            }
-            
-            .tab { 
-                border-bottom: 1px solid #e5e7eb; 
-                border-right: none;
-            }
-            
-            .timeline::before { 
-                left: 8px; 
-            }
-            
-            .timeline-marker { 
-                left: 0px; 
-            }
-            
-            .timeline-item { 
-                padding-left: 32px; 
-            }
-            
-            .content-area {
-                padding: 20px;
-            }
+            .header h1 { font-size: 2rem; }
+            .tabs { flex-direction: column; }
+            .tab { border-bottom: 1px solid #e5e7eb; border-right: none; }
+            .timeline::before { left: 8px; }
+            .timeline-marker { left: 0px; }
+            .timeline-item { padding-left: 32px; }
+            .content-area { padding: 20px; }
         }
 
-        /* Miglioramenti tipografici */
         h1, h2, h3, h4, h5, h6 {
             letter-spacing: -0.025em;
         }
@@ -411,7 +401,15 @@
             color: #374151;
         }
 
-        /* Quiz Styles */
+        .quiz-section {
+            background: white; 
+            border-radius: 12px; 
+            padding: 24px; 
+            margin-top: 40px; 
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1); 
+            border: 1px solid #f3f4f6;
+        }
+
         .quiz-question {
             display: none;
         }
@@ -450,7 +448,6 @@
             margin-right: 10px;
         }
 
-        /* Calculator Styles */
         .calculator {
             background: #f8f9fa;
             padding: 20px;
@@ -460,10 +457,16 @@
         }
 
         .calculator-input {
-            display: flex;
-            flex-direction: column;
+            display: grid;
+            grid-template-columns: 1fr;
             gap: 15px;
             margin-bottom: 20px;
+        }
+        
+        @media(min-width: 768px) {
+            .calculator-input {
+                grid-template-columns: repeat(2, 1fr);
+            }
         }
 
         .calculator-input label {
@@ -476,6 +479,7 @@
             border: 1px solid #d1d5db;
             border-radius: 6px;
             font-size: 1rem;
+            width: 100%;
         }
 
         .calculator-result {
@@ -511,15 +515,472 @@
                 <a href="mailto:fiscale@bdzassociati.it" style="color: #374151; text-decoration: none; padding: 8px 16px; background: rgba(255,255,255,0.9); border-radius: 6px; font-size: 0.9rem; transition: all 0.2s ease;">
                     📧 fiscale@bdzassociati.it
                 </a>
-                <a href="tel:045477694" style="color: #374151; text-decoration: none; padding: 8px 16px; background: rgba(255,255,255,0.9); border-radius: 6px; font-size: 0.9rem; transition: all 0.2s ease;">
-                    📞 045 477694-97
+                <a href="tel:045577694" style="color: #374151; text-decoration: none; padding: 8px 16px; background: rgba(255,255,255,0.9); border-radius: 6px; font-size: 0.9rem; transition: all 0.2s ease;">
+                    📞 045 577694-97
                 </a>
             </div>
         </div>
 
+        <div class="category-selector">
+            <div class="category-card" data-category="commercio">
+                <span class="category-icon">🛒</span>
+                <div class="category-title">Commercio</div>
+                <div class="category-description">Vendita di beni, e-commerce, agenti di commercio</div>
+            </div>
+            <div class="category-card" data-category="artigianato">
+                <span class="category-icon">🔨</span>
+                <div class="category-title">Artigianato</div>
+                <div class="category-description">Attività manuali, produzione, acconciatori, servizi</div>
+            </div>
+            <div class="category-card" data-category="professionisti-cassa">
+                <span class="category-icon">👨‍⚖️</span>
+                <div class="category-title">Professionista con Cassa</div>
+                <div class="category-description">Architetti, ingegneri, avvocati, commercialisti (con Albo)</div>
+            </div>
+            <div class="category-card" data-category="professionisti-separata">
+                <span class="category-icon">🎨</span>
+                <div class="category-title">Professionista Gest. Separata</div>
+                <div class="category-description">Artisti, musicisti, consulenti, professionisti senza Albo</div>
+            </div>
+        </div>
+
+        <!-- All content areas (Commercio, Artigianato, Cassa, Separata) restano identiche al codice precedente -->
+        
+        <!-- #region COMMERCIO -->
+        <div class="content-area" id="content-commercio">
+            <div class="tabs">
+                <div class="tab active" data-tab="timeline">📅 Timeline Adempimenti</div>
+                <div class="tab" data-tab="costs">💰 Costi e Tasse</div>
+                <div class="tab" data-tab="faq">❓ FAQ</div>
+            </div>
+
+            <div class="tab-content active" id="timeline-commercio">
+                <div class="regime-info">
+                    <div class="regime-title">Focus Regime Forfetario</div>
+                    <div class="regime-details">
+                        <div class="regime-detail"><strong>Limite Ricavi</strong> € 85.000 / anno</div>
+                        <div class="regime-detail"><strong>Coefficiente Redditività</strong> Varia (es. 40%)</div>
+                        <div class="regime-detail"><strong>Aliquota Imposta</strong> 15% (o 5% per 5 anni)</div>
+                    </div>
+                </div>
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <div class="timeline-marker"></div>
+                        <div class="timeline-content">
+                            <div class="timeline-date">FASE 1: Avvio (entro 30 giorni)</div>
+                            <div class="timeline-title">Apertura e Iscrizioni Iniziali</div>
+                            <div class="timeline-description">
+                                <ul>
+                                    <li><b>Apertura Partita IVA</b> con Modello AA9/12 e scelta Codice ATECO (es. 47.91.10 per e-commerce).</li>
+                                    <li><b>Iscrizione al Registro Imprese</b> della Camera di Commercio (CCIAA).</li>
+                                    <li><b>Iscrizione alla Gestione Commercianti INPS</b> per i contributi previdenziali.</li>
+                                    <li><b>SCIA</b> (Segnalazione Certificata di Inizio Attività) al Comune di competenza, se necessaria.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-marker"></div>
+                        <div class="timeline-content">
+                            <div class="timeline-date">FASE 2: Gestione Annuale</div>
+                            <div class="timeline-title">Adempimenti Periodici</div>
+                            <div class="timeline-description">
+                                <ul>
+                                    <li><b>Fatturazione Elettronica:</b> Obbligatoria per tutti (salvo eccezioni specifiche).</li>
+                                    <li><b>Versamenti INPS Fissi:</b> 4 rate annuali (16 Maggio, 20 Agosto, 16 Novembre, 16 Febbraio).</li>
+                                    <li><b>Liquidazioni IVA (solo non forfetari):</b> Mensili o trimestrali.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-marker"></div>
+                        <div class="timeline-content">
+                            <div class="timeline-date">FASE 3: Scadenze Fiscali</div>
+                            <div class="timeline-title">Pagamento Imposte e Contributi</div>
+                            <div class="timeline-description">
+                                <ul>
+                                    <li><b>Entro 30 Giugno:</b> Pagamento del <b>Saldo</b> (anno prec.) e <b>1° Acconto</b> (anno in corso) per imposte e contributi INPS variabili.</li>
+                                    <li><b>Entro 30 Novembre:</b> Pagamento del <b>2° Acconto</b>.</li>
+                                    <li><b>Dichiarazione dei Redditi:</b> Presentazione del Modello Redditi PF.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tab-content" id="costs-commercio">
+                 <div class="cost-calculator">
+                    <h3>Stima Costi Fissi Annuali (escluse imposte e contributi variabili)</h3>
+                    <div class="cost-item">
+                        <span>INPS Commercianti (minimale 2025)</span>
+                        <span><strong>€ 4.549,70</strong></span>
+                    </div>
+                    <div class="cost-item">
+                        <span>Diritto Camerale (CCIAA)</span>
+                        <span><strong>~ € 120,00</strong></span>
+                    </div>
+                    <div class="cost-item">
+                        <span>Spese Amministrative
+                        <span class="cost-item-note">Gestione fiscale e fatt. elettronica (forfettario: 1.000€+110€ | semplificato: 2.000€+250€)</span>
+                        </span>
+                        <span><strong>~ € 1.110 - € 2.250</strong></span>
+                    </div>
+                    <div class="cost-item">
+                        <span>PEC e Firma Digitale</span>
+                        <span><strong>~ € 50,00</strong></span>
+                    </div>
+                    <div class="cost-item cost-total">
+                        <span>Totale Costi Fissi Indicativi Annui</span>
+                        <span><strong>~ € 5.830 - € 6.970</strong></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tab-content" id="faq-commercio">
+                <div class="faq-item">
+                    <div class="faq-question"><span>Cosa succede se supero i minimali INPS?</span><span class="icon">+</span></div>
+                    <div class="faq-answer"><p>Sul reddito che eccede il minimale di circa 18.500€, pagherai un'aliquota aggiuntiva del 24,48%. Questi contributi si versano con le scadenze di giugno e novembre.</p></div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question"><span>Nel forfettario posso avere lo sconto sui contributi?</span><span class="icon">+</span></div>
+                    <div class="faq-answer"><p>Sì, se sei in regime forfettario puoi richiedere all'INPS una riduzione del 35% sui contributi dovuti (sia minimali che eccedenti). Attenzione: verserai meno, ma accumulerai anche meno contributi per la pensione.</p></div>
+                </div>
+                 <div class="faq-item">
+                    <div class="faq-question"><span>Cosa succede se supero 85.000€ ma resto sotto 100.000€?</span><span class="icon">+</span></div>
+                    <div class="faq-answer"><p>Esci dal regime forfettario dall'anno successivo. Se invece superi i 100.000€, esci dal regime forfettario immediatamente e devi applicare l'IVA già dalla fattura che causa il superamento.</p></div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question"><span>Un agente di commercio deve iscriversi a ENASARCO?</span><span class="icon">+</span></div>
+                    <div class="faq-answer"><p>Sì, l'iscrizione alla Fondazione ENASARCO è un adempimento specifico e obbligatorio per gli agenti di commercio, in aggiunta all'INPS. Prevede contributi calcolati sulle provvigioni, divisi tra agente e azienda mandante.</p></div>
+                </div>
+            </div>
+        </div>
+        <!-- #endregion -->
+
+        <!-- #region ARTIGIANATO -->
+        <div class="content-area" id="content-artigianato">
+            <div class="tabs">
+                <div class="tab active" data-tab="timeline">📅 Timeline Adempimenti</div>
+                <div class="tab" data-tab="costs">💰 Costi e Tasse</div>
+                <div class="tab" data-tab="faq">❓ FAQ</div>
+            </div>
+
+            <div class="tab-content active" id="timeline-artigianato">
+                <div class="regime-info">
+                    <div class="regime-title">Focus Regime Forfetario</div>
+                    <div class="regime-details">
+                        <div class="regime-detail"><strong>Limite Ricavi</strong> € 85.000 / anno</div>
+                        <div class="regime-detail"><strong>Coefficiente Redditività</strong> Varia (es. 67%)</div>
+                        <div class="regime-detail"><strong>Aliquota Imposta</strong> 15% (o 5% per 5 anni)</div>
+                    </div>
+                </div>
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <div class="timeline-marker"></div>
+                        <div class="timeline-content">
+                            <div class="timeline-date">FASE 1: Avvio (entro 30 giorni)</div>
+                            <div class="timeline-title">Apertura e Iscrizioni Iniziali</div>
+                            <div class="timeline-description">
+                                <ul>
+                                    <li><b>Apertura Partita IVA</b> con Modello AA9/12 e Codice ATECO (es. 96.02.01 per acconciatore).</li>
+                                    <li><b>Iscrizione all'Albo Artigiani</b> presso la Camera di Commercio.</li>
+                                    <li><b>Iscrizione alla Gestione Artigiani INPS</b> per i contributi.</li>
+                                    <li><b>Iscrizione all'INAIL</b> per l'assicurazione obbligatoria contro gli infortuni.</li>
+                                    <li><b>SCIA</b> al Comune ed eventuali certificazioni specifiche (es. idoneità igienico-sanitaria).</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-marker"></div>
+                        <div class="timeline-content">
+                            <div class="timeline-date">FASE 2: Gestione Annuale</div>
+                            <div class="timeline-title">Adempimenti Periodici</div>
+                            <div class="timeline-description">
+                                <ul>
+                                    <li><b>Fatturazione Elettronica:</b> Obbligatoria per tutti.</li>
+                                    <li><b>Versamenti INPS Fissi:</b> 4 rate annuali (16 Maggio, 20 Agosto, 16 Novembre, 16 Febbraio).</li>
+                                    <li><b>Versamento premio INAIL:</b> Scadenza annuale.</li>
+                                    <li><b>Liquidazioni IVA (solo non forfetari):</b> Mensili o trimestrali.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-marker"></div>
+                        <div class="timeline-content">
+                            <div class="timeline-date">FASE 3: Scadenze Fiscali</div>
+                            <div class="timeline-title">Pagamento Imposte e Contributi</div>
+                            <div class="timeline-description">
+                                <ul>
+                                    <li><b>Entro 30 Giugno:</b> Pagamento del <b>Saldo</b> (anno prec.) e <b>1° Acconto</b> (anno in corso) per imposte e contributi INPS variabili.</li>
+                                    <li><b>Entro 30 Novembre:</b> Pagamento del <b>2° Acconto</b>.</li>
+                                    <li><b>Dichiarazione dei Redditi:</b> Presentazione del Modello Redditi PF.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tab-content" id="costs-artigianato">
+                <div class="cost-calculator">
+                    <h3>Stima Costi Fissi Annuali (escluse imposte e contributi variabili)</h3>
+                    <div class="cost-item">
+                        <span>INPS Artigiani (minimale 2025)</span>
+                        <span><strong>€ 4.460,64</strong></span>
+                    </div>
+                    <div class="cost-item">
+                        <span>INAIL (premio annuale indicativo)</span>
+                        <span><strong>~ € 150 - € 400</strong></span>
+                    </div>
+                     <div class="cost-item">
+                        <span>Diritto Camerale (CCIAA)</span>
+                        <span><strong>~ € 120,00</strong></span>
+                    </div>
+                    <div class="cost-item">
+                        <span>Spese Amministrative
+                        <span class="cost-item-note">Gestione fiscale e fatt. elettronica (forfettario: 1.000€+110€ | semplificato: 2.000€+250€)</span>
+                        </span>
+                        <span><strong>~ € 1.110 - € 2.250</strong></span>
+                    </div>
+                    <div class="cost-item">
+                        <span>PEC e Firma Digitale</span>
+                        <span><strong>~ € 50,00</strong></span>
+                    </div>
+                    <div class="cost-item cost-total">
+                        <span>Totale Costi Fissi Indicativi Annui</span>
+                        <span><strong>~ € 5.890 - € 7.280</strong></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tab-content" id="faq-artigianato">
+                 <div class="faq-item">
+                    <div class="faq-question"><span>Qual è la differenza principale tra Artigiano e Commerciante?</span><span class="icon">+</span></div>
+                    <div class="faq-answer"><p>L'Artigiano svolge un'attività di produzione di beni o servizi dove il lavoro manuale e personale è prevalente sul capitale. È obbligatoria l'iscrizione all'Albo Artigiani e all'INAIL. Il Commerciante svolge principalmente attività di intermediazione e vendita.</p></div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question"><span>L'iscrizione INAIL è sempre obbligatoria?</span><span class="icon">+</span></div>
+                    <div class="faq-answer"><p>Sì, per un artigiano l'iscrizione all'INAIL è obbligatoria per legge, in quanto l'attività manuale comporta un rischio di infortunio. Il premio varia in base alla classe di rischio dell'attività.</p></div>
+                </div>
+            </div>
+        </div>
+        <!-- #endregion -->
+
+        <!-- #region PROFESSIONISTI CASSA -->
+        <div class="content-area" id="content-professionisti-cassa">
+            <div class="tabs">
+                <div class="tab active" data-tab="timeline">📅 Timeline Adempimenti</div>
+                <div class="tab" data-tab="costs">💰 Costi e Tasse</div>
+                <div class="tab" data-tab="faq">❓ FAQ</div>
+            </div>
+
+            <div class="tab-content active" id="timeline-professionisti-cassa">
+                <div class="regime-info">
+                    <div class="regime-title">Focus Regime Forfetario</div>
+                    <div class="regime-details">
+                        <div class="regime-detail"><strong>Limite Ricavi</strong> € 85.000 / anno</div>
+                        <div class="regime-detail"><strong>Coefficiente Redditività</strong> Varia (es. 78%)</div>
+                        <div class="regime-detail"><strong>Aliquota Imposta</strong> 15% (o 5% per 5 anni)</div>
+                    </div>
+                </div>
+                <div class="timeline">
+                     <div class="timeline-item">
+                        <div class="timeline-marker"></div>
+                        <div class="timeline-content">
+                            <div class="timeline-date">FASE 1: Avvio (tempistiche variabili)</div>
+                            <div class="timeline-title">Apertura e Iscrizioni Iniziali</div>
+                            <div class="timeline-description">
+                                <ul>
+                                    <li><b>Iscrizione all'Albo Professionale</b> del proprio Ordine (es. Ordine Architetti).</li>
+                                    <li><b>Apertura Partita IVA</b> con Modello AA9/12 e Codice ATECO specifico (es. 71.11.00 per architetto).</li>
+                                    <li><b>Iscrizione alla Cassa di Previdenza</b> di categoria (es. Inarcassa), obbligatoria.</li>
+                                    <li><b>Stipula Assicurazione RC Professionale:</b> Obbligatoria per legge.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-marker"></div>
+                        <div class="timeline-content">
+                            <div class="timeline-date">FASE 2: Gestione Annuale</div>
+                            <div class="timeline-title">Adempimenti Periodici</div>
+                            <div class="timeline-description">
+                                <ul>
+                                    <li><b>Fatturazione Elettronica:</b> Obbligatoria.</li>
+                                    <li><b>Versamenti alla Cassa:</b> Le scadenze e le modalità sono definite dai regolamenti della singola Cassa di Previdenza.</li>
+                                    <li><b>Liquidazioni IVA (solo non forfetari):</b> Mensili o trimestrali.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                     <div class="timeline-item">
+                        <div class="timeline-marker"></div>
+                        <div class="timeline-content">
+                            <div class="timeline-date">FASE 3: Scadenze Fiscali</div>
+                            <div class="timeline-title">Pagamento Imposte e Saldi Contributivi</div>
+                            <div class="timeline-description">
+                                <ul>
+                                    <li><b>Entro 30 Giugno:</b> Pagamento del <b>Saldo</b> (anno prec.) e <b>1° Acconto</b> (anno in corso) per le imposte.</li>
+                                    <li><b>Entro 30 Novembre:</b> Pagamento del <b>2° Acconto</b> per le imposte.</li>
+                                    <li><b>Dichiarazione dei Redditi:</b> Da presentare per calcolare imposte e conguaglio contributivo da versare alla Cassa.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tab-content" id="costs-professionisti-cassa">
+                 <div class="cost-calculator">
+                    <h3>Stima Costi Fissi Annuali (es. Architetto - escluse imposte e contributi variabili)</h3>
+                    <div class="cost-item">
+                        <span>Cassa Previdenza (minimo soggettivo)</span>
+                        <span><strong>Variabile (es. ~€ 2.600 per Inarcassa)</strong></span>
+                    </div>
+                    <div class="cost-item">
+                        <span>Quota annuale Albo Professionale</span>
+                        <span><strong>~ € 200 - € 400</strong></span>
+                    </div>
+                    <div class="cost-item">
+                        <span>Assicurazione RC Professionale</span>
+                        <span><strong>~ € 250 - € 500</strong></span>
+                    </div>
+                    <div class="cost-item">
+                        <span>Spese Amministrative
+                        <span class="cost-item-note">Gestione fiscale e fatt. elettronica (forfettario: 1.000€+110€ | semplificato: 2.000€+250€)</span>
+                        </span>
+                        <span><strong>~ € 1.110 - € 2.250</strong></span>
+                    </div>
+                    <div class="cost-item">
+                        <span>PEC e Firma Digitale</span>
+                        <span><strong>~ € 50,00</strong></span>
+                    </div>
+                    <div class="cost-item cost-total">
+                        <span>Totale Costi Fissi Indicativi Annui</span>
+                        <span><strong>~ € 4.210 - € 5.800</strong></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tab-content" id="faq-professionisti-cassa">
+                <div class="faq-item">
+                    <div class="faq-question"><span>Devo versare contributi alla cassa anche se non fatturo?</span><span class="icon">+</span></div>
+                    <div class="faq-answer"><p>Sì, quasi tutte le casse professionali prevedono il versamento di un contributo "soggettivo minimo" annuale, indipendentemente dal volume d'affari. Questo garantisce una base pensionistica.</p></div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question"><span>Cos'è il contributo integrativo?</span><span class="icon">+</span></div>
+                    <div class="faq-answer"><p>È una percentuale (solitamente 4% o 5%) che il professionista deve addebitare in fattura al cliente e versare alla propria Cassa. Non concorre a formare reddito né volume d'affari IVA.</p></div>
+                </div>
+            </div>
+        </div>
+        <!-- #endregion -->
+        
+        <!-- #region PROFESSIONISTI SEPARATA -->
+        <div class="content-area" id="content-professionisti-separata">
+            <div class="tabs">
+                <div class="tab active" data-tab="timeline">📅 Timeline Adempimenti</div>
+                <div class="tab" data-tab="costs">💰 Costi e Tasse</div>
+                <div class="tab" data-tab="faq">❓ FAQ</div>
+            </div>
+
+            <div class="tab-content active" id="timeline-professionisti-separata">
+                <div class="regime-info">
+                    <div class="regime-title">Focus Regime Forfetario</div>
+                    <div class="regime-details">
+                        <div class="regime-detail"><strong>Limite Ricavi</strong> € 85.000 / anno</div>
+                        <div class="regime-detail"><strong>Coefficiente Redditività</strong> Varia (es. 67%)</div>
+                        <div class="regime-detail"><strong>Aliquota Imposta</strong> 15% (o 5% per 5 anni)</div>
+                    </div>
+                </div>
+                <div class="timeline">
+                     <div class="timeline-item">
+                        <div class="timeline-marker"></div>
+                        <div class="timeline-content">
+                            <div class="timeline-date">FASE 1: Avvio (entro 30 giorni)</div>
+                            <div class="timeline-title">Apertura e Iscrizioni Iniziali</div>
+                            <div class="timeline-description">
+                                <ul>
+                                    <li><b>Apertura Partita IVA</b> con Modello AA9/12 e Codice ATECO corretto (es. 90.03.09 per attività artistiche).</li>
+                                    <li><b>Iscrizione alla Gestione Separata INPS:</b> Obbligatoria per i professionisti senza una cassa autonoma.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                     <div class="timeline-item">
+                        <div class="timeline-marker"></div>
+                        <div class="timeline-content">
+                            <div class="timeline-date">FASE 2: Gestione Annuale</div>
+                            <div class="timeline-title">Adempimenti Periodici</div>
+                            <div class="timeline-description">
+                                <ul>
+                                    <li><b>Fatturazione Elettronica:</b> Obbligatoria.</li>
+                                    <li><b>Nessun versamento fisso INPS:</b> I contributi si calcolano solo sul reddito e si versano alle scadenze fiscali.</li>
+                                    <li><b>Liquidazioni IVA (solo non forfetari):</b> Mensili o trimestrali.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-marker"></div>
+                        <div class="timeline-content">
+                            <div class="timeline-date">FASE 3: Scadenze Fiscali</div>
+                            <div class="timeline-title">Pagamento Imposte e Contributi</div>
+                            <div class="timeline-description">
+                                <ul>
+                                    <li><b>Entro 30 Giugno:</b> Pagamento del <b>Saldo</b> (anno prec.) e <b>1° Acconto</b> (anno in corso) per imposte e contributi INPS.</li>
+                                    <li><b>Entro 30 Novembre:</b> Pagamento del <b>2° Acconto</b>.</li>
+                                    <li><b>Dichiarazione dei Redditi:</b> Indispensabile per calcolare il reddito imponibile su cui si basano i contributi.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tab-content" id="costs-professionisti-separata">
+                 <div class="cost-calculator">
+                    <h3>Stima Costi Fissi Annuali (escluse imposte e contributi)</h3>
+                     <div class="cost-item">
+                        <span>INPS Gestione Separata</span>
+                        <span><strong>Nessun Minimale - Solo a % sul reddito</strong></span>
+                    </div>
+                    <div class="cost-item">
+                        <span>Spese Amministrative
+                        <span class="cost-item-note">Gestione fiscale e fatt. elettronica (forfettario: 1.000€+110€ | semplificato: 2.000€+250€)</span>
+                        </span>
+                        <span><strong>~ € 1.110 - € 2.250</strong></span>
+                    </div>
+                    <div class="cost-item">
+                        <span>PEC (facoltativa, se non iscritti ad Albi)</span>
+                        <span><strong>~ € 0 - € 30</strong></span>
+                    </div>
+                    <div class="cost-item cost-total">
+                        <span>Totale Costi Fissi Indicativi Annui</span>
+                        <span><strong>~ € 1.110 - € 2.280</strong></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tab-content" id="faq-professionisti-separata">
+                <div class="faq-item">
+                    <div class="faq-question"><span>Qual è il grande vantaggio della Gestione Separata?</span><span class="icon">+</span></div>
+                    <div class="faq-answer"><p>Il vantaggio principale è l'assenza di contributi minimali fissi. Se in un anno non fatturi, non devi versare nulla all'INPS. I contributi sono calcolati in percentuale (circa 26,07%) solo sul reddito imponibile che dichiari.</p></div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question"><span>Posso applicare la rivalsa INPS del 4% in fattura?</span><span class="icon">+</span></div>
+                    <div class="faq-answer"><p>Sì, i professionisti iscritti alla Gestione Separata possono addebitare in fattura una maggiorazione del 4% a titolo di rivalsa, che concorre a formare il reddito imponibile.</p></div>
+                </div>
+            </div>
+        </div>
+        <!-- #endregion -->
+
         <!-- Quiz Section -->
-        <div class="quiz-section" style="background: white; border-radius: 12px; padding: 24px; margin-bottom: 32px; box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1); border: 1px solid #f3f4f6;">
-            <h3 style="text-align: center; margin-bottom: 20px; color: #111827; font-weight: 600;">🎯 Test: Conosci le Basi della Partita IVA?</h3>
+        <div class="quiz-section">
+            <h3 style="text-align: center; margin-bottom: 20px; color: #111827; font-weight: 600;">🎯 Test: Conosci come funziona la tua partita IVA?</h3>
             <div id="quiz-container">
                 <div class="quiz-question active" data-question="1">
                     <h4>1. Qual è il limite di ricavi per restare nel regime forfettario?</h4>
@@ -567,678 +1028,6 @@
                 <div id="quiz-result" style="display: none; margin-top: 15px; padding: 15px; border-radius: 6px;"></div>
             </div>
         </div>
-
-        <div class="category-selector">
-            <div class="category-card" data-category="commercio">
-                <span class="category-icon">🛒</span>
-                <div class="category-title">Commercio</div>
-                <div class="category-description">Vendita di beni, e-commerce, agenti di commercio</div>
-            </div>
-            <div class="category-card" data-category="artigianato">
-                <span class="category-icon">🔨</span>
-                <div class="category-title">Artigianato</div>
-                <div class="category-description">Attività manuali, produzione, acconciatori, servizi alla persona</div>
-            </div>
-            <div class="category-card" data-category="professionisti-cassa">
-                <span class="category-icon">👨‍⚖️</span>
-                <div class="category-title">Professionista con Cassa</div>
-                <div class="category-description">Architetti, ingegneri, avvocati, commercialisti (con Albo)</div>
-            </div>
-            <div class="category-card" data-category="professionisti-separata">
-                <span class="category-icon">🎨</span>
-                <div class="category-title">Professionista Gest. Separata</div>
-                <div class="category-description">Artisti, musicisti, consulenti, professionisti senza Albo</div>
-            </div>
-        </div>
-
-        <!-- #region COMMERCIO -->
-        <div class="content-area" id="content-commercio">
-            <div class="tabs">
-                <div class="tab active" data-tab="timeline">📅 Timeline Adempimenti</div>
-                <div class="tab" data-tab="costs">💰 Costi e Tasse</div>
-                <div class="tab" data-tab="faq">❓ FAQ</div>
-            </div>
-
-            <div class="tab-content active" id="timeline-commercio">
-                <div class="regime-info">
-                    <div class="regime-title">Focus Regime Forfetario</div>
-                    <div class="regime-details">
-                        <div class="regime-detail"><strong>Limite Ricavi</strong> € 85.000 / anno</div>
-                        <div class="regime-detail"><strong>Coefficiente Redditività</strong> Varia per codice ATECO</div>
-                        <div class="regime-detail"><strong>Aliquota Imposta</strong> 15% (o 5% per 5 anni)</div>
-                    </div>
-                </div>
-                <div class="timeline">
-                    <div class="timeline-item">
-                        <div class="timeline-marker"></div>
-                        <div class="timeline-content">
-                            <div class="timeline-date">FASE 1: Avvio (entro 30 giorni)</div>
-                            <div class="timeline-title">Apertura e Iscrizioni Iniziali</div>
-                            <div class="timeline-description">
-                                <ul>
-                                    <li><b>Apertura Partita IVA</b> con Modello AA9/12 e scelta Codice ATECO (es. 47.91.10 per e-commerce).</li>
-                                    <li><b>Iscrizione al Registro Imprese</b> della Camera di Commercio (CCIAA).</li>
-                                    <li><b>Iscrizione alla Gestione Commercianti INPS</b> per i contributi previdenziali.</li>
-                                    <li><b>SCIA</b> (Segnalazione Certificata di Inizio Attività) al Comune di competenza, se necessaria per l'attività specifica (es. commercio al dettaglio).</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="timeline-item">
-                        <div class="timeline-marker"></div>
-                        <div class="timeline-content">
-                            <div class="timeline-date">FASE 2: Gestione Annuale</div>
-                            <div class="timeline-title">Adempimenti Periodici</div>
-                            <div class="timeline-description">
-                                <ul>
-                                    <li><b>Fatturazione Elettronica:</b> Obbligatoria per tutti (salvo eccezioni specifiche come fatture sanitarie).</li>
-                                    <li><b>Versamenti INPS Fissi:</b> 4 rate annuali (16 Maggio, 20 Agosto, 16 Novembre, 16 Febbraio).</li>
-                                    <li><b>Liquidazioni IVA (solo non forfetari):</b> Mensili entro il 16 del mese successivo, o trimestrali entro il 16 del secondo mese successivo al trimestre. Acconti IVA: 27 Maggio, 27 Agosto, 27 Novembre, 27 Dicembre. Saldo ultimo trimestre: entro Marzo dell'anno successivo.</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="timeline-item">
-                        <div class="timeline-marker"></div>
-                        <div class="timeline-content">
-                            <div class="timeline-date">FASE 3: Scadenze Fiscali</div>
-                            <div class="timeline-title">Pagamento Imposte e Contributi</div>
-                            <div class="timeline-description">
-                                <ul>
-                                    <li><b>Entro 30 Giugno:</b> Pagamento del <b>Saldo</b> dell'anno precedente e del <b>1° Acconto</b> per l'anno in corso (imposte e contributi INPS eccedenti il minimale).</li>
-                                    <li><b>Entro 30 Novembre:</b> Pagamento del <b>2° Acconto</b> per l'anno in corso.</li>
-                                    <li><b>Dichiarazione dei Redditi:</b> Presentazione del Modello Redditi PF.</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="tab-content" id="costs-commercio">
-                <div class="calculator">
-                    <h3>💰 Calcolatore Imposte e Contributi</h3>
-                    <div class="calculator-input">
-                        <label>Fatturato Annuo Previsto (€):</label>
-                        <input type="number" id="fatturato-commercio" placeholder="es. 50000" onchange="calculateCommercio()">
-                        
-                        <label>Regime Fiscale:</label>
-                        <select id="regime-commercio" onchange="calculateCommercio()">
-                            <option value="forfettario">Forfettario</option>
-                            <option value="ordinario">Ordinario</option>
-                        </select>
-                    </div>
-                    <div id="result-commercio" class="calculator-result" style="display: none;">
-                        <div class="result-item">
-                            <span>Imposte (IRPEF/Forfettario):</span>
-                            <span id="imposte-commercio">€ 0</span>
-                        </div>
-                        <div class="result-item">
-                            <span>Contributi INPS:</span>
-                            <span id="inps-commercio">€ 4.549,70</span>
-                        </div>
-                        <div class="result-item result-total">
-                            <span><strong>Totale Annuo da Versare:</strong></span>
-                            <span id="totale-commercio"><strong>€ 0</strong></span>
-                        </div>
-                        <hr style="margin: 15px 0; border: none; border-top: 1px solid #e5e7eb;">
-                        <div class="result-item" style="color: #4b5563;">
-                            <span>💳 Saldo + 1° Acconto (30 Giugno):</span>
-                            <span id="giugno-commercio">€ 0</span>
-                        </div>
-                        <div class="result-item" style="color: #4b5563;">
-                            <span>💳 2° Acconto (30 Novembre):</span>
-                            <span id="novembre-commercio">€ 0</span>
-                        </div>
-                    </div>
-                </div>
-                 <div class="cost-calculator">
-                    <h3>Stima Costi Fissi Annuali (escluse imposte e contributi variabili)</h3>
-                    <div class="cost-item">
-                        <span>INPS Commercianti (minimale 2025)</span>
-                        <span><strong>€ 4.549,70</strong></span>
-                    </div>
-                    <div class="cost-item">
-                        <span>Diritto Camerale (CCIAA)</span>
-                        <span><strong>~ € 120,00</strong></span>
-                    </div>
-                    <div class="cost-item">
-                        <span>Spese Amministrative
-                        <span class="cost-item-note">Gestione contabile e fiscale, fatturazione elettronica inclusa</span>
-                        </span>
-                        <span><strong>~ € 1.110 - € 2.250</strong></span>
-                    </div>
-                    <div class="cost-item">
-                        <span>PEC (obbligatoria per iscrizione CCIAA)</span>
-                        <span><strong>~ € 30,00</strong></span>
-                    </div>
-                    <div class="cost-item">
-                        <span>Firma Digitale</span>
-                        <span><strong>~ € 20,00</strong></span>
-                    </div>
-                    <div class="cost-item cost-total">
-                        <span>Totale Costi Fissi Indicativi Annui</span>
-                        <span><strong>~ € 5.830 - € 6.970</strong></span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="tab-content" id="faq-commercio">
-                <div class="faq-item">
-                    <div class="faq-question"><span>La PEC è obbligatoria per i commercianti?</span><span class="icon">+</span></div>
-                    <div class="faq-answer"><p>Sì, la PEC è obbligatoria per tutti i commercianti che devono iscriversi alla Camera di Commercio. Deve essere comunicata alla CCIAA al momento dell'iscrizione e mantenuta attiva.</p></div>
-                </div>
-                <div class="faq-item">
-                    <div class="faq-question"><span>Come si pagano le imposte e i contributi INPS?</span><span class="icon">+</span></div>
-                    <div class="faq-answer"><p>I pagamenti avvengono tramite modello F24 che prepara lo Studio. Puoi pagare con home banking utilizzando il codice F24 fornito. Se hai crediti in compensazione, lo Studio può effettuare il pagamento direttamente tramite i servizi dell'Agenzia delle Entrate con addebito sul tuo conto corrente.</p></div>
-                </div>
-                <div class="faq-item">
-                    <div class="faq-question"><span>Cosa succede se supero i minimali INPS?</span><span class="icon">+</span></div>
-                    <div class="faq-answer"><p>Sul reddito che eccede il minimale di circa 18.500€, pagherai un'aliquota aggiuntiva del 24,48%. Questi contributi si versano con le scadenze di giugno e novembre.</p></div>
-                </div>
-                <div class="faq-item">
-                    <div class="faq-question"><span>Nel forfettario posso avere lo sconto sui contributi?</span><span class="icon">+</span></div>
-                    <div class="faq-answer"><p>Sì, se sei in regime forfettario puoi richiedere all'INPS una riduzione del 35% sui contributi dovuti (sia minimali che eccedenti). Attenzione: verserai meno, ma accumulerai anche meno contributi per la pensione.</p></div>
-                </div>
-                <div class="faq-item">
-                    <div class="faq-question"><span>Cosa succede se supero 85.000€ ma resto sotto 100.000€?</span><span class="icon">+</span></div>
-                    <div class="faq-answer"><p>Esci dal regime forfettario dall'anno successivo. Se invece superi i 100.000€, esci dal regime forfettario immediatamente e devi applicare l'IVA già dalla fattura che causa il superamento.</p></div>
-                </div>
-            </div>
-        </div>
-        <!-- #endregion -->
-
-        <!-- #region ARTIGIANATO -->
-        <div class="content-area" id="content-artigianato">
-            <div class="tabs">
-                <div class="tab active" data-tab="timeline">📅 Timeline Adempimenti</div>
-                <div class="tab" data-tab="costs">💰 Costi e Tasse</div>
-                <div class="tab" data-tab="faq">❓ FAQ</div>
-            </div>
-
-            <div class="tab-content active" id="timeline-artigianato">
-                <div class="regime-info">
-                    <div class="regime-title">Focus Regime Forfetario</div>
-                    <div class="regime-details">
-                        <div class="regime-detail"><strong>Limite Ricavi</strong> € 85.000 / anno</div>
-                        <div class="regime-detail"><strong>Coefficiente Redditività</strong> Varia per codice ATECO</div>
-                        <div class="regime-detail"><strong>Aliquota Imposta</strong> 15% (o 5% per 5 anni)</div>
-                    </div>
-                </div>
-                <div class="timeline">
-                    <div class="timeline-item">
-                        <div class="timeline-marker"></div>
-                        <div class="timeline-content">
-                            <div class="timeline-date">FASE 1: Avvio (entro 30 giorni)</div>
-                            <div class="timeline-title">Apertura e Iscrizioni Iniziali</div>
-                            <div class="timeline-description">
-                                <ul>
-                                    <li><b>Apertura Partita IVA</b> con Modello AA9/12 e Codice ATECO (es. 96.02.01 per acconciatore).</li>
-                                    <li><b>Iscrizione all'Albo Artigiani</b> presso la Camera di Commercio.</li>
-                                    <li><b>Iscrizione alla Gestione Artigiani INPS</b> per i contributi.</li>
-                                    <li><b>Iscrizione all'INAIL</b> per l'assicurazione obbligatoria contro gli infortuni.</li>
-                                    <li><b>SCIA</b> al Comune ed eventuali certificazioni specifiche (es. idoneità igienico-sanitaria).</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="timeline-item">
-                        <div class="timeline-marker"></div>
-                        <div class="timeline-content">
-                            <div class="timeline-date">FASE 2: Gestione Annuale</div>
-                            <div class="timeline-title">Adempimenti Periodici</div>
-                            <div class="timeline-description">
-                                <ul>
-                                    <li><b>Fatturazione Elettronica:</b> Obbligatoria per tutti (salvo eccezioni specifiche come fatture sanitarie).</li>
-                                    <li><b>Versamenti INPS Fissi:</b> 4 rate annuali (16 Maggio, 20 Agosto, 16 Novembre, 16 Febbraio).</li>
-                                    <li><b>Versamento premio INAIL:</b> Scadenza annuale.</li>
-                                    <li><b>Liquidazioni IVA (solo non forfetari):</b> Mensili entro il 16 del mese successivo, o trimestrali entro il 16 del secondo mese successivo al trimestre. Acconti IVA: 27 Maggio, 27 Agosto, 27 Novembre, 27 Dicembre. Saldo ultimo trimestre: entro Marzo dell'anno successivo.</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="timeline-item">
-                        <div class="timeline-marker"></div>
-                        <div class="timeline-content">
-                            <div class="timeline-date">FASE 3: Scadenze Fiscali</div>
-                            <div class="timeline-title">Pagamento Imposte e Contributi</div>
-                            <div class="timeline-description">
-                                <ul>
-                                    <li><b>Entro 30 Giugno:</b> Pagamento del <b>Saldo</b> (anno prec.) e <b>1° Acconto</b> (anno in corso) per imposte e contributi INPS variabili.</li>
-                                    <li><b>Entro 30 Novembre:</b> Pagamento del <b>2° Acconto</b>.</li>
-                                    <li><b>Dichiarazione dei Redditi:</b> Presentazione del Modello Redditi PF.</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="tab-content" id="costs-artigianato">
-                <div class="calculator">
-                    <h3>💰 Calcolatore Imposte e Contributi</h3>
-                    <div class="calculator-input">
-                        <label>Fatturato Annuo Previsto (€):</label>
-                        <input type="number" id="fatturato-artigianato" placeholder="es. 50000" onchange="calculateArtigianato()">
-                        
-                        <label>Regime Fiscale:</label>
-                        <select id="regime-artigianato" onchange="calculateArtigianato()">
-                            <option value="forfettario">Forfettario</option>
-                            <option value="ordinario">Ordinario</option>
-                        </select>
-                    </div>
-                    <div id="result-artigianato" class="calculator-result" style="display: none;">
-                        <div class="result-item">
-                            <span>Imposte (IRPEF/Forfettario):</span>
-                            <span id="imposte-artigianato">€ 0</span>
-                        </div>
-                        <div class="result-item">
-                            <span>Contributi INPS:</span>
-                            <span id="inps-artigianato">€ 4.460,64</span>
-                        </div>
-                        <div class="result-item result-total">
-                            <span><strong>Totale Annuo da Versare:</strong></span>
-                            <span id="totale-artigianato"><strong>€ 0</strong></span>
-                        </div>
-                        <hr style="margin: 15px 0; border: none; border-top: 1px solid #e5e7eb;">
-                        <div class="result-item" style="color: #4b5563;">
-                            <span>💳 Saldo + 1° Acconto (30 Giugno):</span>
-                            <span id="giugno-artigianato">€ 0</span>
-                        </div>
-                        <div class="result-item" style="color: #4b5563;">
-                            <span>💳 2° Acconto (30 Novembre):</span>
-                            <span id="novembre-artigianato">€ 0</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="cost-calculator">
-                    <h3>Stima Costi Fissi Annuali (escluse imposte e contributi variabili)</h3>
-                    <div class="cost-item">
-                        <span>INPS Artigiani (minimale 2025)</span>
-                        <span><strong>€ 4.460,64</strong></span>
-                    </div>
-                    <div class="cost-item">
-                        <span>INAIL (premio annuale indicativo)</span>
-                        <span><strong>~ € 150 - € 400</strong></span>
-                    </div>
-                     <div class="cost-item">
-                        <span>Diritto Camerale (CCIAA)</span>
-                        <span><strong>~ € 120,00</strong></span>
-                    </div>
-                    <div class="cost-item">
-                        <span>Spese Amministrative
-                        <span class="cost-item-note">Gestione contabile e fiscale, fatturazione elettronica inclusa</span>
-                        </span>
-                        <span><strong>~ € 1.110 - € 2.250</strong></span>
-                    </div>
-                    <div class="cost-item">
-                        <span>PEC (obbligatoria per iscrizione CCIAA)</span>
-                        <span><strong>~ € 30,00</strong></span>
-                    </div>
-                    <div class="cost-item">
-                        <span>Firma Digitale</span>
-                        <span><strong>~ € 20,00</strong></span>
-                    </div>
-                    <div class="cost-item cost-total">
-                        <span>Totale Costi Fissi Indicativi Annui</span>
-                        <span><strong>~ € 5.890 - € 7.280</strong></span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="tab-content" id="faq-artigianato">
-                <div class="faq-item">
-                    <div class="faq-question"><span>La PEC è obbligatoria per gli artigiani?</span><span class="icon">+</span></div>
-                    <div class="faq-answer"><p>Sì, la PEC è obbligatoria per tutti gli artigiani che devono iscriversi all'Albo Artigiani presso la Camera di Commercio. Deve essere comunicata alla CCIAA e mantenuta attiva.</p></div>
-                </div>
-                <div class="faq-item">
-                    <div class="faq-question"><span>Come si pagano le imposte e i contributi INPS?</span><span class="icon">+</span></div>
-                    <div class="faq-answer"><p>I pagamenti avvengono tramite modello F24 che prepara lo Studio. Puoi pagare con home banking utilizzando il codice F24 fornito. Se hai crediti in compensazione, lo Studio può effettuare il pagamento direttamente tramite i servizi dell'Agenzia delle Entrate con addebito sul tuo conto corrente.</p></div>
-                </div>
-                <div class="faq-item">
-                    <div class="faq-question"><span>Cosa succede se supero i minimali INPS?</span><span class="icon">+</span></div>
-                    <div class="faq-answer"><p>Sul reddito che eccede il minimale di circa 18.500€, pagherai un'aliquota aggiuntiva del 24,48%. Questi contributi si versano con le scadenze di giugno e novembre.</p></div>
-                </div>
-                <div class="faq-item">
-                    <div class="faq-question"><span>Nel forfettario posso avere lo sconto sui contributi?</span><span class="icon">+</span></div>
-                    <div class="faq-answer"><p>Sì, se sei in regime forfettario puoi richiedere all'INPS una riduzione del 35% sui contributi dovuti (sia minimali che eccedenti). Attenzione: verserai meno, ma accumulerai anche meno contributi per la pensione.</p></div>
-                </div>
-                <div class="faq-item">
-                    <div class="faq-question"><span>Cosa succede se supero 85.000€ ma resto sotto 100.000€?</span><span class="icon">+</span></div>
-                    <div class="faq-answer"><p>Esci dal regime forfettario dall'anno successivo. Se invece superi i 100.000€, esci dal regime forfettario immediatamente e devi applicare l'IVA già dalla fattura che causa il superamento.</p></div>
-                </div>
-                <div class="faq-item">
-                    <div class="faq-question"><span>Qual è la differenza principale tra Artigiano e Commerciante?</span><span class="icon">+</span></div>
-                    <div class="faq-answer"><p>L'Artigiano svolge un'attività di produzione di beni o servizi dove il lavoro manuale e personale è prevalente sul capitale. È obbligatoria l'iscrizione all'Albo Artigiani e all'INAIL. Il Commerciante svolge principalmente attività di intermediazione e vendita.</p></div>
-                </div>
-                <div class="faq-item">
-                    <div class="faq-question"><span>L'iscrizione INAIL è sempre obbligatoria?</span><span class="icon">+</span></div>
-                    <div class="faq-answer"><p>Sì, per un artigiano l'iscrizione all'INAIL è obbligatoria per legge, in quanto l'attività manuale comporta un rischio di infortunio. Il premio varia in base alla classe di rischio dell'attività.</p></div>
-                </div>
-                <div class="faq-item">
-                    <div class="faq-question"><span>Posso assumere dipendenti come artigiano?</span><span class="icon">+</span></div>
-                    <div class="faq-answer"><p>Sì, è possibile assumere dipendenti, ma ci sono dei limiti numerici per non perdere la qualifica di impresa artigiana. I limiti variano in base al settore produttivo.</p></div>
-                </div>
-            </div>
-        </div>
-        <!-- #endregion -->
-
-        <!-- #region PROFESSIONISTI CASSA -->
-        <div class="content-area" id="content-professionisti-cassa">
-            <div class="tabs">
-                <div class="tab active" data-tab="timeline">📅 Timeline Adempimenti</div>
-                <div class="tab" data-tab="costs">💰 Costi e Tasse</div>
-                <div class="tab" data-tab="faq">❓ FAQ</div>
-            </div>
-
-            <div class="tab-content active" id="timeline-professionisti-cassa">
-                <div class="regime-info">
-                    <div class="regime-title">Focus Regime Forfetario</div>
-                    <div class="regime-details">
-                        <div class="regime-detail"><strong>Limite Ricavi</strong> € 85.000 / anno</div>
-                        <div class="regime-detail"><strong>Coefficiente Redditività</strong> Varia per codice ATECO</div>
-                        <div class="regime-detail"><strong>Aliquota Imposta</strong> 15% (o 5% per 5 anni)</div>
-                    </div>
-                </div>
-                <div class="timeline">
-                     <div class="timeline-item">
-                        <div class="timeline-marker"></div>
-                        <div class="timeline-content">
-                            <div class="timeline-date">FASE 1: Avvio (tempistiche variabili)</div>
-                            <div class="timeline-title">Apertura e Iscrizioni Iniziali</div>
-                            <div class="timeline-description">
-                                <ul>
-                                    <li><b>Iscrizione all'Albo Professionale</b> del proprio Ordine (es. Ordine Architetti).</li>
-                                    <li><b>Apertura Partita IVA</b> con Modello AA9/12 e Codice ATECO specifico (es. 71.11.09 per architetto).</li>
-                                    <li><b>Iscrizione alla Cassa di Previdenza</b> di categoria (es. Inarcassa), obbligatoria entro il 31 Ottobre dell'anno successivo all'iscrizione all'Albo.</li>
-                                    <li><b>Stipula Assicurazione RC Professionale:</b> Obbligatoria per legge.</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="timeline-item">
-                        <div class="timeline-marker"></div>
-                        <div class="timeline-content">
-                            <div class="timeline-date">FASE 2: Gestione Annuale</div>
-                            <div class="timeline-title">Adempimenti Periodici</div>
-                            <div class="timeline-description">
-                                <ul>
-                                    <li><b>Fatturazione Elettronica:</b> Obbligatoria per tutti (salvo eccezioni specifiche come fatture sanitarie).</li>
-                                    <li><b>Versamenti alla Cassa:</b> Le scadenze e le modalità (acconti, saldi) variano in base alla specifica Cassa di Previdenza di appartenenza. Consultare i regolamenti della propria Cassa.</li>
-                                    <li><b>Liquidazioni IVA (solo non forfetari):</b> Mensili entro il 16 del mese successivo, o trimestrali entro il 16 del secondo mese successivo al trimestre. Acconti IVA: 27 Maggio, 27 Agosto, 27 Novembre, 27 Dicembre. Saldo ultimo trimestre: entro Marzo dell'anno successivo.</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                     <div class="timeline-item">
-                        <div class="timeline-marker"></div>
-                        <div class="timeline-content">
-                            <div class="timeline-date">FASE 3: Scadenze Fiscali</div>
-                            <div class="timeline-title">Pagamento Imposte e Saldi Contributivi</div>
-                            <div class="timeline-description">
-                                <ul>
-                                    <li><b>Entro 30 Giugno:</b> Pagamento del <b>Saldo</b> (anno prec.) e <b>1° Acconto</b> (anno in corso) per le imposte.</li>
-                                    <li><b>Entro 30 Novembre:</b> Pagamento del <b>2° Acconto</b> per le imposte.</li>
-                                    <li><b>Dichiarazione dei Redditi:</b> Da presentare per calcolare imposte e conguaglio contributivo da versare alla Cassa.</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="tab-content" id="costs-professionisti-cassa">
-                <div class="calculator">
-                    <h3>💰 Calcolatore Imposte e Contributi</h3>
-                    <div class="calculator-input">
-                        <label>Fatturato Annuo Previsto (€):</label>
-                        <input type="number" id="fatturato-cassa" placeholder="es. 50000" onchange="calculateCassa()">
-                        
-                        <label>Regime Fiscale:</label>
-                        <select id="regime-cassa" onchange="calculateCassa()">
-                            <option value="forfettario">Forfettario</option>
-                            <option value="ordinario">Ordinario</option>
-                        </select>
-                    </div>
-                    <div id="result-cassa" class="calculator-result" style="display: none;">
-                        <div class="result-item">
-                            <span>Imposte (IRPEF/Forfettario):</span>
-                            <span id="imposte-cassa">€ 0</span>
-                        </div>
-                        <div class="result-item">
-                            <span>Contributi Cassa Previdenza:</span>
-                            <span id="cassa-cassa">€ 2.600</span>
-                        </div>
-                        <div class="result-item result-total">
-                            <span><strong>Totale Annuo da Versare:</strong></span>
-                            <span id="totale-cassa"><strong>€ 0</strong></span>
-                        </div>
-                        <hr style="margin: 15px 0; border: none; border-top: 1px solid #e5e7eb;">
-                        <div class="result-item" style="color: #4b5563;">
-                            <span>💳 Saldo + 1° Acconto (30 Giugno):</span>
-                            <span id="giugno-cassa">€ 0</span>
-                        </div>
-                        <div class="result-item" style="color: #4b5563;">
-                            <span>💳 2° Acconto (30 Novembre):</span>
-                            <span id="novembre-cassa">€ 0</span>
-                        </div>
-                    </div>
-                </div>
-                 <div class="cost-calculator">
-                    <h3>Stima Costi Fissi Annuali (es. Architetto - escluse imposte e contributi variabili)</h3>
-                    <div class="cost-item">
-                        <span>Cassa Previdenza (minimo soggettivo)</span>
-                        <span><strong>Variabile (es. ~€ 2.600 per Inarcassa)</strong></span>
-                    </div>
-                    <div class="cost-item">
-                        <span>Quota annuale Albo Professionale</span>
-                        <span><strong>~ € 200 - € 400</strong></span>
-                    </div>
-                    <div class="cost-item">
-                        <span>Assicurazione RC Professionale</span>
-                        <span><strong>~ € 250 - € 500</strong></span>
-                    </div>
-                    <div class="cost-item">
-                        <span>Spese Amministrative
-                        <span class="cost-item-note">Gestione contabile e fiscale, fatturazione elettronica inclusa</span>
-                        </span>
-                        <span><strong>~ € 1.110 - € 2.250</strong></span>
-                    </div>
-                    <div class="cost-item">
-                        <span>PEC (obbligatoria per iscrizione Albo)</span>
-                        <span><strong>~ € 30,00</strong></span>
-                    </div>
-                    <div class="cost-item">
-                        <span>Firma Digitale</span>
-                        <span><strong>~ € 20,00</strong></span>
-                    </div>
-                    <div class="cost-item cost-total">
-                        <span>Totale Costi Fissi Indicativi Annui</span>
-                        <span><strong>~ € 4.210 - € 5.800</strong></span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="tab-content" id="faq-professionisti-cassa">
-                <div class="faq-item">
-                    <div class="faq-question"><span>La PEC è obbligatoria per i professionisti iscritti ad Albi?</span><span class="icon">+</span></div>
-                    <div class="faq-answer"><p>Sì, la PEC è obbligatoria per tutti i professionisti iscritti ad un Albo professionale (avvocati, architetti, ingegneri, commercialisti, ecc.). Deve essere comunicata all'Ordine di appartenenza e mantenuta attiva.</p></div>
-                </div>
-                <div class="faq-item">
-                    <div class="faq-question"><span>Come si pagano le imposte e i contributi alla Cassa?</span><span class="icon">+</span></div>
-                    <div class="faq-answer"><p>Le imposte si pagano tramite modello F24 che prepara lo Studio, utilizzabile con home banking. I contributi alla Cassa seguono le modalità specifiche di ogni Cassa. Se hai crediti in compensazione, lo Studio può effettuare il pagamento direttamente tramite i servizi dell'Agenzia delle Entrate con addebito sul tuo conto corrente.</p></div>
-                </div>
-                 <div class="faq-item">
-                    <div class="faq-question"><span>Posso applicare il regime forfettario?</span><span class="icon">+</span></div>
-                    <div class="faq-answer"><p>Sì, il regime forfettario è accessibile anche ai professionisti iscritti a un Albo, a condizione di rispettare il limite di ricavi di 85.000€ e le altre cause di esclusione. Il coefficiente di redditività varia in base al codice ATECO specifico dell'attività.</p></div>
-                </div>
-                <div class="faq-item">
-                    <div class="faq-question"><span>Cosa succede se supero 85.000€ ma resto sotto 100.000€?</span><span class="icon">+</span></div>
-                    <div class="faq-answer"><p>Esci dal regime forfettario dall'anno successivo. Se invece superi i 100.000€, esci dal regime forfettario immediatamente e devi applicare l'IVA già dalla fattura che causa il superamento.</p></div>
-                </div>
-                <div class="faq-item">
-                    <div class="faq-question"><span>Devo versare contributi alla cassa anche se non fatturo?</span><span class="icon">+</span></div>
-                    <div class="faq-answer"><p>Sì, quasi tutte le casse professionali prevedono il versamento di un contributo "soggettivo minimo" annuale, indipendentemente dal volume d'affari. Questo garantisce una base pensionistica.</p></div>
-                </div>
-                 <div class="faq-item">
-                    <div class="faq-question"><span>Cos'è il contributo integrativo?</span><span class="icon">+</span></div>
-                    <div class="faq-answer"><p>È una percentuale (solitamente 4% o 5%) che il professionista deve addebitare in fattura al cliente e versare alla propria Cassa. Non concorre a formare reddito né volume d'affari IVA.</p></div>
-                </div>
-            </div>
-        </div>
-        <!-- #endregion -->
-        
-        <!-- #region PROFESSIONISTI SEPARATA -->
-        <div class="content-area" id="content-professionisti-separata">
-            <div class="tabs">
-                <div class="tab active" data-tab="timeline">📅 Timeline Adempimenti</div>
-                <div class="tab" data-tab="costs">💰 Costi e Tasse</div>
-                <div class="tab" data-tab="faq">❓ FAQ</div>
-            </div>
-
-            <div class="tab-content active" id="timeline-professionisti-separata">
-                <div class="regime-info">
-                    <div class="regime-title">Focus Regime Forfetario</div>
-                    <div class="regime-details">
-                        <div class="regime-detail"><strong>Limite Ricavi</strong> € 85.000 / anno</div>
-                        <div class="regime-detail"><strong>Coefficiente Redditività</strong> Varia per codice ATECO</div>
-                        <div class="regime-detail"><strong>Aliquota Imposta</strong> 15% (o 5% per 5 anni)</div>
-                    </div>
-                </div>
-                <div class="timeline">
-                     <div class="timeline-item">
-                        <div class="timeline-marker"></div>
-                        <div class="timeline-content">
-                            <div class="timeline-date">FASE 1: Avvio (entro 30 giorni)</div>
-                            <div class="timeline-title">Apertura e Iscrizioni Iniziali</div>
-                            <div class="timeline-description">
-                                <ul>
-                                    <li><b>Apertura Partita IVA</b> con Modello AA9/12 e Codice ATECO corretto (es. 90.03.09 per attività artistiche, 74.90.99 per consulenti).</li>
-                                    <li><b>Iscrizione alla Gestione Separata INPS:</b> Obbligatoria per i professionisti senza una cassa autonoma. Si fa online sul sito INPS.</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                     <div class="timeline-item">
-                        <div class="timeline-marker"></div>
-                        <div class="timeline-content">
-                            <div class="timeline-date">FASE 2: Gestione Annuale</div>
-                            <div class="timeline-title">Adempimenti Periodici</div>
-                            <div class="timeline-description">
-                                <ul>
-                                    <li><b>Fatturazione Elettronica:</b> Obbligatoria per tutti (salvo eccezioni specifiche come fatture sanitarie).</li>
-                                    <li><b>Nessun versamento fisso INPS:</b> I contributi si calcolano solo sul reddito effettivamente prodotto e si versano alle scadenze fiscali.</li>
-                                    <li><b>Liquidazioni IVA (solo non forfetari):</b> Mensili entro il 16 del mese successivo, o trimestrali entro il 16 del secondo mese successivo al trimestre. Acconti IVA: 27 Maggio, 27 Agosto, 27 Novembre, 27 Dicembre. Saldo ultimo trimestre: entro Marzo dell'anno successivo.</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="timeline-item">
-                        <div class="timeline-marker"></div>
-                        <div class="timeline-content">
-                            <div class="timeline-date">FASE 3: Scadenze Fiscali</div>
-                            <div class="timeline-title">Pagamento Imposte e Contributi</div>
-                            <div class="timeline-description">
-                                <ul>
-                                    <li><b>Entro 30 Giugno:</b> Pagamento del <b>Saldo</b> (anno prec.) e <b>1° Acconto</b> (anno in corso) per imposte e contributi INPS.</li>
-                                    <li><b>Entro 30 Novembre:</b> Pagamento del <b>2° Acconto</b> per imposte e contributi INPS.</li>
-                                    <li><b>Dichiarazione dei Redditi:</b> Indispensabile per calcolare il reddito imponibile su cui si basano i contributi.</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="tab-content" id="costs-professionisti-separata">
-                <div class="calculator">
-                    <h3>💰 Calcolatore Imposte e Contributi</h3>
-                    <div class="calculator-input">
-                        <label>Fatturato Annuo Previsto (€):</label>
-                        <input type="number" id="fatturato-separata" placeholder="es. 50000" onchange="calculateSeparata()">
-                        
-                        <label>Regime Fiscale:</label>
-                        <select id="regime-separata" onchange="calculateSeparata()">
-                            <option value="forfettario">Forfettario</option>
-                            <option value="ordinario">Ordinario</option>
-                        </select>
-                    </div>
-                    <div id="result-separata" class="calculator-result" style="display: none;">
-                        <div class="result-item">
-                            <span>Imposte (IRPEF/Forfettario):</span>
-                            <span id="imposte-separata">€ 0</span>
-                        </div>
-                        <div class="result-item">
-                            <span>Contributi INPS Gestione Separata:</span>
-                            <span id="inps-separata">€ 0 (solo su reddito)</span>
-                        </div>
-                        <div class="result-item result-total">
-                            <span><strong>Totale Annuo da Versare:</strong></span>
-                            <span id="totale-separata"><strong>€ 0</strong></span>
-                        </div>
-                        <hr style="margin: 15px 0; border: none; border-top: 1px solid #e5e7eb;">
-                        <div class="result-item" style="color: #4b5563;">
-                            <span>💳 Saldo + 1° Acconto (30 Giugno):</span>
-                            <span id="giugno-separata">€ 0</span>
-                        </div>
-                        <div class="result-item" style="color: #4b5563;">
-                            <span>💳 2° Acconto (30 Novembre):</span>
-                            <span id="novembre-separata">€ 0</span>
-                        </div>
-                    </div>
-                </div>
-                 <div class="cost-calculator">
-                    <h3>Stima Costi Fissi Annuali (escluse imposte e contributi)</h3>
-                     <div class="cost-item">
-                        <span>INPS Gestione Separata</span>
-                        <span><strong>Nessun Minimale - Solo a % sul reddito</strong></span>
-                    </div>
-                    <div class="cost-item">
-                        <span>Spese Amministrative
-                        <span class="cost-item-note">Gestione contabile e fiscale, fatturazione elettronica inclusa</span>
-                        </span>
-                        <span><strong>~ € 1.110 - € 2.250</strong></span>
-                    </div>
-                    <div class="cost-item">
-                        <span>PEC (facoltativa, se non iscritti ad Albi)</span>
-                        <span><strong>~ € 0 - € 30</strong></span>
-                    </div>
-                    <div class="cost-item cost-total">
-                        <span>Totale Costi Fissi Indicativi Annui</span>
-                        <span><strong>~ € 1.110 - € 2.280</strong></span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="tab-content" id="faq-professionisti-separata">
-                <div class="faq-item">
-                    <div class="faq-question"><span>La PEC è obbligatoria per i professionisti senza Albo?</span><span class="icon">+</span></div>
-                    <div class="faq-answer"><p>No, per i professionisti non iscritti ad Albi professionali la PEC non è obbligatoria. Diventa obbligatoria solo se decidono di iscriversi volontariamente alla Camera di Commercio. Tuttavia, la PEC è comunque consigliabile per motivi pratici e professionali.</p></div>
-                </div>
-                <div class="faq-item">
-                    <div class="faq-question"><span>Come si pagano le imposte e i contributi INPS?</span><span class="icon">+</span></div>
-                    <div class="faq-answer"><p>I pagamenti avvengono tramite modello F24 che prepara lo Studio. Puoi pagare con home banking utilizzando il codice F24 fornito. Se hai crediti in compensazione, lo Studio può effettuare il pagamento direttamente tramite i servizi dell'Agenzia delle Entrate con addebito sul tuo conto corrente.</p></div>
-                </div>
-                 <div class="faq-item">
-                    <div class="faq-question"><span>Qual è il grande vantaggio della Gestione Separata?</span><span class="icon">+</span></div>
-                    <div class="faq-answer"><p>Il vantaggio principale è l'assenza di contributi minimali fissi. Se in un anno non fatturi, non devi versare nulla all'INPS. I contributi sono calcolati in percentuale (circa 26,07%) solo sul reddito imponibile che dichiari.</p></div>
-                </div>
-                <div class="faq-item">
-                    <div class="faq-question"><span>Posso applicare il regime forfettario?</span><span class="icon">+</span></div>
-                    <div class="faq-answer"><p>Sì, il regime forfettario è accessibile anche ai professionisti della Gestione Separata, a condizione di rispettare il limite di ricavi di 85.000€ e le altre cause di esclusione. Il coefficiente di redditività varia in base al codice ATECO specifico dell'attività.</p></div>
-                </div>
-                <div class="faq-item">
-                    <div class="faq-question"><span>Cosa succede se supero 85.000€ ma resto sotto 100.000€?</span><span class="icon">+</span></div>
-                    <div class="faq-answer"><p>Esci dal regime forfettario dall'anno successivo. Se invece superi i 100.000€, esci dal regime forfettario immediatamente e devi applicare l'IVA già dalla fattura che causa il superamento.</p></div>
-                </div>
-                <div class="faq-item">
-                    <div class="faq-question"><span>Posso applicare la rivalsa INPS del 4% in fattura?</span><span class="icon">+</span></div>
-                    <div class="faq-answer"><p>Sì, i professionisti iscritti alla Gestione Separata (che non siano già soggetti ad altra forma di previdenza obbligatoria) possono addebitare in fattura una maggiorazione del 4% a titolo di rivalsa, che concorre a formare il reddito imponibile.</p></div>
-                </div>
-            </div>
-        </div>
-        <!-- #endregion -->
-
     </div>
 
     <script>
@@ -1247,12 +1036,12 @@
         const totalQuestions = 5;
 
         document.addEventListener('DOMContentLoaded', function() {
-            const categoryCards = document.querySelectorAll('.category-card');
+            // ... (il resto dello script resta identico) ...
+             const categoryCards = document.querySelectorAll('.category-card');
             const contentAreas = document.querySelectorAll('.content-area');
             const allTabs = document.querySelectorAll('.tab');
             const allFaqQuestions = document.querySelectorAll('.faq-question');
 
-            // Function to switch main category
             function switchCategory(category) {
                 categoryCards.forEach(c => c.classList.remove('active'));
                 contentAreas.forEach(c => c.classList.remove('active'));
@@ -1264,14 +1053,12 @@
                 if (content) content.classList.add('active');
             }
 
-            // Category selection
             categoryCards.forEach(card => {
                 card.addEventListener('click', function() {
                     switchCategory(this.dataset.category);
                 });
             });
 
-            // Tab switching within content areas
             allTabs.forEach(tab => {
                 tab.addEventListener('click', function() {
                     const contentArea = this.closest('.content-area');
@@ -1289,20 +1076,15 @@
                 });
             });
 
-            // FAQ accordion
             allFaqQuestions.forEach(question => {
                 question.addEventListener('click', function() {
                     const answer = this.nextElementSibling;
                     const isActive = this.classList.contains('active');
-
-                    // Close all other FAQs in the same container
                     this.closest('.tab-content').querySelectorAll('.faq-question').forEach(q => {
                         q.classList.remove('active');
                         q.nextElementSibling.classList.remove('active');
                          q.querySelector('.icon').style.transform = 'rotate(0deg)';
                     });
-
-                    // Toggle the clicked one
                     if (!isActive) {
                         this.classList.add('active');
                         answer.classList.add('active');
@@ -1311,38 +1093,28 @@
                 });
             });
 
-            // Initialize first category as active
             if (categoryCards.length > 0) {
                 switchCategory(categoryCards[0].dataset.category);
             }
         });
 
-        // Quiz Functions
         function nextQuestion() {
             if (currentQuestion < totalQuestions) {
-                // Check answer
                 const selectedAnswer = document.querySelector(`input[name="q${currentQuestion}"]:checked`);
                 if (selectedAnswer && selectedAnswer.value === "1") {
                     quizScore++;
                 }
-
-                // Hide current question
                 document.querySelector(`[data-question="${currentQuestion}"]`).classList.remove('active');
-                
-                // Show next question
                 currentQuestion++;
                 document.querySelector(`[data-question="${currentQuestion}"]`).classList.add('active');
-                
                 if (currentQuestion === totalQuestions) {
                     document.getElementById('quiz-btn').textContent = 'Vedi Risultato';
                 }
             } else {
-                // Final question - check answer
                 const selectedAnswer = document.querySelector(`input[name="q${currentQuestion}"]:checked`);
                 if (selectedAnswer && selectedAnswer.value === "1") {
                     quizScore++;
                 }
-                
                 showQuizResult();
             }
         }
@@ -1350,13 +1122,10 @@
         function showQuizResult() {
             document.getElementById('quiz-container').style.display = 'none';
             document.getElementById('quiz-btn').style.display = 'none';
-            
             const resultDiv = document.getElementById('quiz-result');
             resultDiv.style.display = 'block';
-            
             const percentage = (quizScore / totalQuestions) * 100;
             let message, bgColor;
-            
             if (percentage >= 80) {
                 message = `🎉 Eccellente! ${quizScore}/${totalQuestions} (${percentage}%) - Sei molto preparato!`;
                 bgColor = '#d1fae5';
@@ -1367,180 +1136,9 @@
                 message = `📚 Da migliorare! ${quizScore}/${totalQuestions} (${percentage}%) - Studia le sezioni qui sotto!`;
                 bgColor = '#fee2e2';
             }
-            
             resultDiv.innerHTML = message;
             resultDiv.style.backgroundColor = bgColor;
         }
-
-        // Calculator Functions
-        function calculateCommercio() {
-            const fatturato = parseFloat(document.getElementById('fatturato-commercio').value) || 0;
-            const regime = document.getElementById('regime-commercio').value;
-            
-            if (fatturato === 0) {
-                document.getElementById('result-commercio').style.display = 'none';
-                return;
-            }
-            
-            let imposte = 0;
-            let inpsBase = 4549.70;
-            let inpsExtra = 0;
-            
-            if (regime === 'forfettario') {
-                // Coefficiente medio 50% per semplificazione
-                const redditoImponibile = fatturato * 0.5;
-                imposte = redditoImponibile * 0.15;
-                
-                // INPS eccedenti il minimale
-                const minimaleInps = 18500;
-                if (redditoImponibile > minimaleInps) {
-                    inpsExtra = (redditoImponibile - minimaleInps) * 0.2448;
-                }
-            } else {
-                // Regime ordinario - stima IRPEF 23%
-                imposte = fatturato * 0.23;
-                
-                // INPS su tutto il reddito
-                const minimaleInps = 18500;
-                if (fatturato > minimaleInps) {
-                    inpsExtra = (fatturato - minimaleInps) * 0.2448;
-                }
-            }
-            
-            const totaleInps = inpsBase + inpsExtra;
-            const totaleAnnuo = imposte + totaleInps;
-            const giugno = totaleAnnuo * 0.5;
-            const novembre = totaleAnnuo * 0.5;
-            
-            document.getElementById('imposte-commercio').textContent = `€ ${imposte.toFixed(0)}`;
-            document.getElementById('inps-commercio').textContent = `€ ${totaleInps.toFixed(0)}`;
-            document.getElementById('totale-commercio').textContent = `€ ${totaleAnnuo.toFixed(0)}`;
-            document.getElementById('giugno-commercio').textContent = `€ ${giugno.toFixed(0)}`;
-            document.getElementById('novembre-commercio').textContent = `€ ${novembre.toFixed(0)}`;
-            
-            document.getElementById('result-commercio').style.display = 'block';
-        }
-
-        function calculateArtigianato() {
-            const fatturato = parseFloat(document.getElementById('fatturato-artigianato').value) || 0;
-            const regime = document.getElementById('regime-artigianato').value;
-            
-            if (fatturato === 0) {
-                document.getElementById('result-artigianato').style.display = 'none';
-                return;
-            }
-            
-            let imposte = 0;
-            let inpsBase = 4460.64;
-            let inpsExtra = 0;
-            
-            if (regime === 'forfettario') {
-                const redditoImponibile = fatturato * 0.67;
-                imposte = redditoImponibile * 0.15;
-                
-                const minimaleInps = 18500;
-                if (redditoImponibile > minimaleInps) {
-                    inpsExtra = (redditoImponibile - minimaleInps) * 0.2448;
-                }
-            } else {
-                imposte = fatturato * 0.23;
-                
-                const minimaleInps = 18500;
-                if (fatturato > minimaleInps) {
-                    inpsExtra = (fatturato - minimaleInps) * 0.2448;
-                }
-            }
-            
-            const totaleInps = inpsBase + inpsExtra;
-            const totaleAnnuo = imposte + totaleInps;
-            const giugno = totaleAnnuo * 0.5;
-            const novembre = totaleAnnuo * 0.5;
-            
-            document.getElementById('imposte-artigianato').textContent = `€ ${imposte.toFixed(0)}`;
-            document.getElementById('inps-artigianato').textContent = `€ ${totaleInps.toFixed(0)}`;
-            document.getElementById('totale-artigianato').textContent = `€ ${totaleAnnuo.toFixed(0)}`;
-            document.getElementById('giugno-artigianato').textContent = `€ ${giugno.toFixed(0)}`;
-            document.getElementById('novembre-artigianato').textContent = `€ ${novembre.toFixed(0)}`;
-            
-            document.getElementById('result-artigianato').style.display = 'block';
-        }
-
-        function calculateCassa() {
-            const fatturato = parseFloat(document.getElementById('fatturato-cassa').value) || 0;
-            const regime = document.getElementById('regime-cassa').value;
-            
-            if (fatturato === 0) {
-                document.getElementById('result-cassa').style.display = 'none';
-                return;
-            }
-            
-            let imposte = 0;
-            let cassaBase = 2600;
-            let cassaExtra = 0;
-            
-            if (regime === 'forfettario') {
-                const redditoImponibile = fatturato * 0.78;
-                imposte = redditoImponibile * 0.15;
-                
-                // Contributi cassa su reddito eccedente
-                if (redditoImponibile > 20000) {
-                    cassaExtra = (redditoImponibile - 20000) * 0.15;
-                }
-            } else {
-                imposte = fatturato * 0.23;
-                
-                if (fatturato > 20000) {
-                    cassaExtra = (fatturato - 20000) * 0.15;
-                }
-            }
-            
-            const totaleCassa = cassaBase + cassaExtra;
-            const totaleAnnuo = imposte + totaleCassa;
-            const giugno = totaleAnnuo * 0.5;
-            const novembre = totaleAnnuo * 0.5;
-            
-            document.getElementById('imposte-cassa').textContent = `€ ${imposte.toFixed(0)}`;
-            document.getElementById('cassa-cassa').textContent = `€ ${totaleCassa.toFixed(0)}`;
-            document.getElementById('totale-cassa').textContent = `€ ${totaleAnnuo.toFixed(0)}`;
-            document.getElementById('giugno-cassa').textContent = `€ ${giugno.toFixed(0)}`;
-            document.getElementById('novembre-cassa').textContent = `€ ${novembre.toFixed(0)}`;
-            
-            document.getElementById('result-cassa').style.display = 'block';
-        }
-
-        function calculateSeparata() {
-            const fatturato = parseFloat(document.getElementById('fatturato-separata').value) || 0;
-            const regime = document.getElementById('regime-separata').value;
-            
-            if (fatturato === 0) {
-                document.getElementById('result-separata').style.display = 'none';
-                return;
-            }
-            
-            let imposte = 0;
-            let inpsSeparata = 0;
-            
-            if (regime === 'forfettario') {
-                const redditoImponibile = fatturato * 0.67;
-                imposte = redditoImponibile * 0.15;
-                inpsSeparata = redditoImponibile * 0.2607;
-            } else {
-                imposte = fatturato * 0.23;
-                inpsSeparata = fatturato * 0.2607;
-            }
-            
-            const totaleAnnuo = imposte + inpsSeparata;
-            const giugno = totaleAnnuo * 0.5;
-            const novembre = totaleAnnuo * 0.5;
-            
-            document.getElementById('imposte-separata').textContent = `€ ${imposte.toFixed(0)}`;
-            document.getElementById('inps-separata').textContent = `€ ${inpsSeparata.toFixed(0)}`;
-            document.getElementById('totale-separata').textContent = `€ ${totaleAnnuo.toFixed(0)}`;
-            document.getElementById('giugno-separata').textContent = `€ ${giugno.toFixed(0)}`;
-            document.getElementById('novembre-separata').textContent = `€ ${novembre.toFixed(0)}`;
-            
-            document.getElementById('result-separata').style.display = 'block';
-        }
     </script>
 </body>
-  </html>
+</html>
