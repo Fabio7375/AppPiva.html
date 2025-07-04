@@ -5,524 +5,97 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>App Guida per Titolare di Partita IVA - Studio Basso De Bortoli Zambelli</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', system-ui, sans-serif;
-            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-            min-height: 100vh;
-            color: #1f2937;
-            line-height: 1.6;
-            font-weight: 400;
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 20px;
-        }
-
-        .header {
-            text-align: center;
-            color: #374151;
-            margin-bottom: 40px;
-            padding: 20px;
-        }
-
-        .header h1 {
-            font-size: 2.8rem;
-            margin-bottom: 10px;
-            font-weight: 600;
-            letter-spacing: -0.025em;
-        }
-
-        .header h2 {
-            font-size: 1.4rem;
-            margin-bottom: 15px;
-            font-weight: 500;
-            color: #4b5563;
-        }
-
-        .header p {
-            font-size: 1.2rem;
-            color: #6b7280;
-            max-width: 700px;
-            margin: 0 auto;
-            font-weight: 400;
-        }
-
-        .header a:hover {
-            background: rgba(255,255,255,1) !important;
-            transform: translateY(-1px);
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-        }
-
-        /* --- MODIFICA CHIAVE PER LA RIGA UNICA --- */
-        .category-selector {
-            display: flex; /* Cambiato da grid a flex */
-            gap: 16px;
-            margin-bottom: 40px;
-            overflow-x: auto; /* Aggiunto per lo scroll orizzontale */
-            padding-bottom: 16px; /* Spazio per la scrollbar (anche se nascosta) */
-            /* Nasconde la scrollbar ma mantiene la funzionalità */
-            -ms-overflow-style: none;  /* IE and Edge */
-            scrollbar-width: none;  /* Firefox */
-        }
-        .category-selector::-webkit-scrollbar {
-            display: none; /* Chrome, Safari, and Opera */
-        }
-        /* --- FINE MODIFICA --- */
-
-        .category-card {
-            background: white;
-            border-radius: 12px;
-            padding: 24px;
-            text-align: center;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1), 0 1px 2px rgba(0, 0, 0, 0.06);
-            border: 1px solid #f3f4f6;
-            /* Aggiunto per mantenere la dimensione corretta in un layout flex */
-            flex: 0 0 280px; 
-        }
-
-        .category-card:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.07), 0 2px 4px rgba(0, 0, 0, 0.06);
-        }
-
-        .category-card.active {
-            border-color: #4b5563;
-            background: #f9fafb;
-        }
-
-        .category-icon {
-            font-size: 2.5rem;
-            margin-bottom: 16px;
-            display: block;
-            filter: grayscale(100%);
-        }
-
-        .category-title {
-            font-size: 1.25rem;
-            margin-bottom: 8px;
-            color: #111827;
-            font-weight: 600;
-        }
-
-        .category-description {
-            color: #6b7280;
-            font-size: 0.925rem;
-            font-weight: 400;
-        }
-
-        .content-area {
-            background: white;
-            border-radius: 12px;
-            padding: 32px;
-            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1), 0 1px 2px rgba(0, 0, 0, 0.06);
-            border: 1px solid #f3f4f6;
-            display: none;
-        }
-
-        .content-area.active {
-            display: block;
-            animation: fadeIn 0.3s ease-in-out;
-        }
-        
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(8px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .tabs {
-            display: flex;
-            margin-bottom: 32px;
-            border-bottom: 1px solid #e5e7eb;
-            flex-wrap: wrap;
-        }
-
-        .tab {
-            padding: 12px 20px;
-            cursor: pointer;
-            border-bottom: 2px solid transparent;
-            font-weight: 500;
-            transition: all 0.2s ease;
-            color: #6b7280;
-            font-size: 0.925rem;
-        }
-
-        .tab:hover {
-            background: #f9fafb;
-            color: #374151;
-        }
-
-        .tab.active {
-            color: #111827;
-            border-bottom-color: #4b5563;
-        }
-
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', system-ui, sans-serif; background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%); min-height: 100vh; color: #1f2937; line-height: 1.6; font-weight: 400; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 20px; }
+        .header { text-align: center; color: #374151; margin-bottom: 40px; padding: 20px; }
+        .header h1 { font-size: 2.8rem; margin-bottom: 10px; font-weight: 600; letter-spacing: -0.025em; }
+        .header h2 { font-size: 1.4rem; margin-bottom: 15px; font-weight: 500; color: #4b5563; }
+        .header p { font-size: 1.2rem; color: #6b7280; max-width: 700px; margin: 0 auto; font-weight: 400; }
+        .header a:hover { background: rgba(255,255,255,1) !important; transform: translateY(-1px); box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
+        .category-selector { display: flex; gap: 16px; margin-bottom: 40px; overflow-x: auto; padding-bottom: 16px; -ms-overflow-style: none; scrollbar-width: none; }
+        .category-selector::-webkit-scrollbar { display: none; }
+        .category-card { background: white; border-radius: 12px; padding: 24px; text-align: center; cursor: pointer; transition: all 0.2s ease; box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1), 0 1px 2px rgba(0, 0, 0, 0.06); border: 1px solid #f3f4f6; flex: 0 0 280px; }
+        .category-card:hover, .category-card.active { transform: translateY(-4px); box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08), 0 2px 6px rgba(0, 0, 0, 0.06); }
+        .category-card.active { border-color: #4b5563; background: #f9fafb; }
+        .category-icon { font-size: 2.5rem; margin-bottom: 16px; display: block; filter: grayscale(100%); transition: filter 0.2s; }
+        .category-card.active .category-icon { filter: grayscale(0%); }
+        .category-title { font-size: 1.25rem; margin-bottom: 8px; color: #111827; font-weight: 600; }
+        .category-description { color: #6b7280; font-size: 0.925rem; font-weight: 400; }
+        .content-area { background: white; border-radius: 12px; padding: 32px; box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1), 0 1px 2px rgba(0, 0, 0, 0.06); border: 1px solid #f3f4f6; display: none; }
+        .content-area.active { display: block; animation: fadeIn 0.4s ease-in-out; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        .tabs { display: flex; margin-bottom: 32px; border-bottom: 1px solid #e5e7eb; flex-wrap: wrap; }
+        .tab { padding: 12px 20px; cursor: pointer; border-bottom: 2px solid transparent; font-weight: 500; transition: all 0.2s ease; color: #6b7280; font-size: 0.925rem; }
+        .tab:hover { background: #f9fafb; color: #374151; }
+        .tab.active { color: #111827; border-bottom-color: #4b5563; }
         .tab-content { display: none; }
         .tab-content.active { display: block; }
-        
-        .timeline {
-            position: relative;
-            padding: 20px 0;
-        }
-
-        .timeline::before {
-            content: '';
-            position: absolute;
-            left: 16px;
-            top: 0;
-            bottom: 0;
-            width: 2px;
-            background: #e5e7eb;
-        }
-
-        .timeline-item {
-            position: relative;
-            margin-bottom: 32px;
-            padding-left: 52px;
-        }
-        
-        .timeline-item:last-child {
-            margin-bottom: 0;
-        }
-
-        .timeline-marker {
-            position: absolute;
-            left: 8px;
-            width: 16px;
-            height: 16px;
-            background: #6b7280;
-            border-radius: 50%;
-            border: 3px solid white;
-            box-shadow: 0 0 0 1px #e5e7eb;
-        }
-
-        .timeline-content {
-            background: #f9fafb;
-            padding: 20px;
-            border-radius: 8px;
-            border-left: 3px solid #d1d5db;
-        }
-
-        .timeline-date {
-            font-weight: 600;
-            color: #4b5563;
-            margin-bottom: 8px;
-            font-size: 0.925rem;
-            text-transform: uppercase;
-            letter-spacing: 0.025em;
-        }
-
-        .timeline-title {
-            font-size: 1.25rem;
-            margin-bottom: 8px;
-            color: #111827;
-            font-weight: 600;
-        }
-
-        .timeline-description { 
-            color: #6b7280; 
-            font-size: 0.925rem;
-        }
-        
-        .timeline-description ul { 
-            list-style-position: inside; 
-            padding-left: 8px; 
-            margin-top: 8px; 
-        }
-        
-        .timeline-description li { 
-            margin-bottom: 4px; 
-        }
-
-        .cost-calculator {
-            background: #f9fafb;
-            padding: 24px;
-            border-radius: 8px;
-            margin: 20px 0;
-            border: 1px solid #f3f4f6;
-        }
-        
-        .cost-calculator h3 { 
-            margin-bottom: 20px; 
-            font-weight: 600; 
-            color: #111827;
-        }
-
-        .cost-item {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 12px;
-            padding: 16px;
-            background: white;
-            border-radius: 6px;
-            border: 1px solid #f3f4f6;
-        }
-        
-        .cost-item span:last-child { 
-            font-weight: 600; 
-            color: #111827; 
-        }
-
-        .cost-item-note { 
-            font-size: 0.8rem; 
-            color: #9ca3af; 
-            display: block; 
-            margin-top: 2px;
-        }
-        
-        .cost-total {
-            font-weight: 700;
-            font-size: 1.125rem;
-            color: #111827;
-            border-top: 1px solid #e5e7eb;
-            padding-top: 16px;
-            margin-top: 16px;
-        }
-
-        .faq-item {
-            margin-bottom: 8px;
-            border: 1px solid #f3f4f6;
-            border-radius: 8px;
-            overflow: hidden;
-        }
-
-        .faq-question {
-            padding: 16px 20px;
-            background: #f9fafb;
-            cursor: pointer;
-            font-weight: 500;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            transition: background 0.2s ease;
-            color: #374151;
-        }
-
-        .faq-question:hover { 
-            background: #f3f4f6; 
-        }
-        
-        .faq-question .icon { 
-            transition: transform 0.2s ease;
-            font-weight: 300;
-            font-size: 1.25rem;
-            color: #9ca3af;
-        }
-
-        .faq-answer {
-            padding: 0 20px;
-            max-height: 0;
-            overflow: hidden;
-            transition: all 0.3s ease-in-out;
-            background: white;
-        }
-
-        .faq-answer p { 
-            padding-bottom: 16px; 
-            color: #6b7280;
-            font-size: 0.925rem;
-        }
-        
-        .faq-answer.active { 
-            max-height: 400px; 
-            padding-top: 16px; 
-        }
-        
-        .faq-question.active .icon { 
-            transform: rotate(45deg); 
-        }
-
-        .regime-info {
-            background: linear-gradient(135deg, #4b5563 0%, #6b7280 100%);
-            color: white;
-            padding: 24px;
-            border-radius: 8px;
-            margin: 20px 0;
-            text-align: center;
-        }
-
-        .regime-title {
-            font-size: 1.25rem;
-            margin-bottom: 16px;
-            font-weight: 600;
-        }
-
-        .regime-details {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-            gap: 12px;
-        }
-
-        .regime-detail {
-            background: rgba(255,255,255,0.1);
-            padding: 12px;
-            border-radius: 6px;
-        }
-        
-        .regime-detail strong { 
-            display: block; 
-            margin-bottom: 4px; 
-            opacity: 0.9; 
-            font-size: 0.825rem;
-            font-weight: 500;
-            text-transform: uppercase;
-            letter-spacing: 0.025em;
-        }
-        
-        @media (max-width: 768px) {
-            .header h1 { font-size: 2rem; }
-            .tabs { flex-direction: column; }
-            .tab { border-bottom: 1px solid #e5e7eb; border-right: none; }
-            .timeline::before { left: 8px; }
-            .timeline-marker { left: 0px; }
-            .timeline-item { padding-left: 32px; }
-            .content-area { padding: 20px; }
-        }
-
-        h1, h2, h3, h4, h5, h6 {
-            letter-spacing: -0.025em;
-        }
-
-        strong, b {
-            font-weight: 600;
-        }
-
-        .timeline-description b {
-            color: #374151;
-        }
-
-        .quiz-section {
-            background: white; 
-            border-radius: 12px; 
-            padding: 24px; 
-            margin-top: 40px; 
-            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1); 
-            border: 1px solid #f3f4f6;
-        }
-
-        .quiz-question {
-            display: none;
-        }
-
-        .quiz-question.active {
-            display: block;
-        }
-
-        .quiz-question h4 {
-            margin-bottom: 15px;
-            color: #111827;
-            font-weight: 500;
-        }
-
-        .quiz-options {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-        }
-
-        .quiz-options label {
-            display: flex;
-            align-items: center;
-            padding: 10px;
-            background: #f9fafb;
-            border-radius: 6px;
-            cursor: pointer;
-            transition: background 0.2s ease;
-        }
-
-        .quiz-options label:hover {
-            background: #f3f4f6;
-        }
-
-        .quiz-options input[type="radio"] {
-            margin-right: 10px;
-        }
-
-        .calculator {
-            background: #f8f9fa;
-            padding: 20px;
-            border-radius: 8px;
-            margin: 20px 0;
-            border: 1px solid #e5e7eb;
-        }
-
-        .calculator-input {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 15px;
-            margin-bottom: 20px;
-        }
-        
-        @media(min-width: 768px) {
-            .calculator-input {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
-
-        .calculator-input label {
-            font-weight: 500;
-            color: #374151;
-        }
-
-        .calculator-input input, .calculator-input select {
-            padding: 8px 12px;
-            border: 1px solid #d1d5db;
-            border-radius: 6px;
-            font-size: 1rem;
-            width: 100%;
-        }
-
-        .calculator-result {
-            background: white;
-            padding: 15px;
-            border-radius: 6px;
-            border: 1px solid #e5e7eb;
-            margin-top: 15px;
-        }
-
-        .result-item {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 8px;
-            padding: 8px 0;
-        }
-
-        .result-total {
-            border-top: 1px solid #e5e7eb;
-            padding-top: 12px;
-            font-weight: 600;
-            color: #111827;
-        }
+        h1, h2, h3, h4, h5, h6 { letter-spacing: -0.025em; }
+        strong, b { font-weight: 600; }
+        .timeline { position: relative; padding: 20px 0; }
+        .timeline::before { content: ''; position: absolute; left: 16px; top: 0; bottom: 0; width: 2px; background: #e5e7eb; }
+        .timeline-item { position: relative; margin-bottom: 32px; padding-left: 52px; }
+        .timeline-item:last-child { margin-bottom: 0; }
+        .timeline-marker { position: absolute; left: 8px; width: 16px; height: 16px; background: #6b7280; border-radius: 50%; border: 3px solid white; box-shadow: 0 0 0 1px #e5e7eb; }
+        .timeline-content { background: #f9fafb; padding: 20px; border-radius: 8px; border-left: 3px solid #d1d5db; }
+        .timeline-date { font-weight: 600; color: #4b5563; margin-bottom: 8px; font-size: 0.925rem; text-transform: uppercase; letter-spacing: 0.025em; }
+        .timeline-title { font-size: 1.25rem; margin-bottom: 8px; color: #111827; font-weight: 600; }
+        .timeline-description { color: #6b7280; font-size: 0.925rem; }
+        .timeline-description ul { list-style-position: inside; padding-left: 8px; margin-top: 8px; }
+        .timeline-description li { margin-bottom: 4px; }
+        .timeline-description b { color: #374151; }
+        .faq-item { margin-bottom: 8px; border: 1px solid #f3f4f6; border-radius: 8px; overflow: hidden; }
+        .faq-question { padding: 16px 20px; background: #f9fafb; cursor: pointer; font-weight: 500; display: flex; justify-content: space-between; align-items: center; transition: background 0.2s ease; color: #374151; }
+        .faq-question:hover { background: #f3f4f6; }
+        .faq-question .icon { transition: transform 0.2s ease; font-weight: 300; font-size: 1.25rem; color: #9ca3af; }
+        .faq-answer { padding: 0 20px; max-height: 0; overflow: hidden; transition: all 0.3s ease-in-out; background: white; }
+        .faq-answer p { padding-bottom: 16px; color: #6b7280; font-size: 0.925rem; }
+        .faq-answer.active { max-height: 400px; padding-top: 16px; }
+        .faq-question.active .icon { transform: rotate(45deg); }
+        .quiz-section { background: white; border-radius: 12px; padding: 24px; margin-top: 40px; box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1); border: 1px solid #f3f4f6; }
+        .quiz-question { display: none; }
+        .quiz-question.active { display: block; }
+        .quiz-question h4 { margin-bottom: 15px; color: #111827; font-weight: 500; }
+        .quiz-options { display: flex; flex-direction: column; gap: 10px; }
+        .quiz-options label { display: flex; align-items: center; padding: 10px; background: #f9fafb; border-radius: 6px; cursor: pointer; transition: background 0.2s ease; }
+        .quiz-options label:hover { background: #f3f4f6; }
+        .quiz-options input[type="radio"] { margin-right: 10px; }
+        .calculator { background: white; padding: 24px; border-radius: 12px; margin-top: 20px; border: 1px solid #e5e7eb; }
+        .calculator h3 { margin-bottom: 20px; }
+        .calculator-grid { display: grid; grid-template-columns: 1fr; gap: 24px; }
+        @media(min-width: 768px) { .calculator-grid { grid-template-columns: 1fr 1fr; } }
+        .input-group { display: flex; flex-direction: column; gap: 8px; }
+        .input-group label { font-weight: 500; color: #374151; font-size: 0.9rem; }
+        .input-group input, .input-group select { padding: 10px 12px; border: 1px solid #d1d5db; border-radius: 6px; font-size: 1rem; width: 100%; background: #f9fafb; }
+        .options-group { display: flex; flex-direction: column; gap: 12px; margin-top: 10px;}
+        .options-group label { font-weight: 400; display: flex; align-items: center; gap: 8px; cursor: pointer; }
+        .result-container { background: #f9fafb; padding: 20px; border-radius: 8px; margin-top: 20px; border: 1px solid #e5e7eb; }
+        .result-row { display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid #e5e7eb; }
+        .result-row:last-child { border-bottom: none; }
+        .result-row-highlight { background-color: #eef2ff; padding: 12px; border-radius: 6px; margin-top: 10px; }
+        .result-total, .result-row-highlight span { font-weight: 600; color: #111827; font-size: 1.1rem; }
+        .dettaglio-calcoli { background: #f3f4f6; padding: 15px; border-radius: 6px; margin-top: 15px; font-size: 0.85rem; color: #6b7280; line-height: 1.7; }
+        .dettaglio-calcoli h4 { margin-bottom: 10px; color: #111827; }
+        .dettaglio-calcoli p { margin-bottom: 5px; }
+        .disclaimer-note { font-style: italic; color: #9ca3af; font-size: 0.8rem; margin-top: 10px; }
+        @media (max-width: 768px) { .header h1 { font-size: 2rem; } .content-area { padding: 20px; } .calculator-grid { grid-template-columns: 1fr; } .timeline::before { left: 8px; } .timeline-marker { left: 0px; } .timeline-item { padding-left: 32px; } }
     </style>
 </head>
 <body>
     <div class="container">
-        <div class="header">
-            <h1>📋 App Guida per Titolare di Partita IVA</h1>
-            <h2 style="font-size: 1.4rem; margin-bottom: 15px; font-weight: 500; color: #4b5563;">Studio Basso De Bortoli Zambelli</h2>
+        <header class="header">
+            <h1>📋 App Guida Partita IVA</h1>
+            <h2>Studio Basso De Bortoli Zambelli</h2>
             <p>La tua guida chiara e completa per avviare la tua attività. Seleziona la tua categoria per scoprire timeline, costi e risposte ai tuoi dubbi.</p>
-            <div style="margin-top: 20px; display: flex; justify-content: center; gap: 20px; flex-wrap: wrap;">
-                <a href="mailto:fiscale@bdzassociati.it" style="color: #374151; text-decoration: none; padding: 8px 16px; background: rgba(255,255,255,0.9); border-radius: 6px; font-size: 0.9rem; transition: all 0.2s ease;">
-                    📧 fiscale@bdzassociati.it
-                </a>
-                <a href="tel:045577694" style="color: #374151; text-decoration: none; padding: 8px 16px; background: rgba(255,255,255,0.9); border-radius: 6px; font-size: 0.9rem; transition: all 0.2s ease;">
-                    📞 045 577694-97
-                </a>
+             <div style="margin-top: 20px; display: flex; justify-content: center; gap: 20px; flex-wrap: wrap;">
+                <a href="mailto:fiscale@bdzassociati.it" style="color: #374151; text-decoration: none; padding: 8px 16px; background: rgba(255,255,255,0.9); border-radius: 6px; font-size: 0.9rem; transition: all 0.2s ease;">📧 fiscale@bdzassociati.it</a>
+                <a href="tel:045577694" style="color: #374151; text-decoration: none; padding: 8px 16px; background: rgba(255,255,255,0.9); border-radius: 6px; font-size: 0.9rem; transition: all 0.2s ease;">📞 045 577694-97</a>
             </div>
-        </div>
+        </header>
 
         <div class="category-selector">
-            <div class="category-card" data-category="commercio">
+             <div class="category-card" data-category="commercio">
                 <span class="category-icon">🛒</span>
                 <div class="category-title">Commercio</div>
                 <div class="category-description">Vendita di beni, e-commerce, agenti di commercio</div>
@@ -544,601 +117,345 @@
             </div>
         </div>
 
-        <!-- All content areas (Commercio, Artigianato, Cassa, Separata) restano identiche al codice precedente -->
-        
-        <!-- #region COMMERCIO -->
-        <div class="content-area" id="content-commercio">
-            <div class="tabs">
-                <div class="tab active" data-tab="timeline">📅 Timeline Adempimenti</div>
-                <div class="tab" data-tab="costs">💰 Costi e Tasse</div>
-                <div class="tab" data-tab="faq">❓ FAQ</div>
-            </div>
-
-            <div class="tab-content active" id="timeline-commercio">
-                <div class="regime-info">
-                    <div class="regime-title">Focus Regime Forfetario</div>
-                    <div class="regime-details">
-                        <div class="regime-detail"><strong>Limite Ricavi</strong> € 85.000 / anno</div>
-                        <div class="regime-detail"><strong>Coefficiente Redditività</strong> Varia (es. 40%)</div>
-                        <div class="regime-detail"><strong>Aliquota Imposta</strong> 15% (o 5% per 5 anni)</div>
-                    </div>
+        <main>
+            <div class="content-area" id="content-commercio"></div>
+            <div class="content-area" id="content-artigianato"></div>
+            <div class="content-area" id="content-professionisti-cassa"></div>
+            <div class="content-area" id="content-professionisti-separata"></div>
+            
+             <!-- Quiz Section -->
+            <div class="quiz-section">
+                <h3 style="text-align: center; margin-bottom: 20px; color: #111827; font-weight: 600;">🎯 Test: Conosci come funziona la tua partita IVA?</h3>
+                <div id="quiz-container">
+                    <div class="quiz-question active" data-question="1"><h4>1. Qual è il limite di ricavi per restare nel regime forfettario?</h4><div class="quiz-options"><label><input type="radio" name="q1" value="0"> € 65.000</label><label><input type="radio" name="q1" value="1"> € 85.000</label><label><input type="radio" name="q1" value="0"> € 100.000</label></div></div>
+                    <div class="quiz-question" data-question="2"><h4>2. Gli acconti INPS per commercianti si pagano:</h4><div class="quiz-options"><label><input type="radio" name="q2" value="0"> Ogni mese</label><label><input type="radio" name="q2" value="1"> 4 rate l'anno (Maggio, Agosto, Novembre, Febbraio)</label><label><input type="radio" name="q2" value="0"> Solo a fine anno</label></div></div>
+                    <div class="quiz-question" data-question="3"><h4>3. La fatturazione elettronica è obbligatoria:</h4><div class="quiz-options"><label><input type="radio" name="q3" value="0"> Solo per il regime ordinario</label><label><input type="radio" name="q3" value="1"> Per tutti (salvo eccezioni specifiche)</label><label><input type="radio" name="q3" value="0"> Solo sopra € 50.000 di fatturato</label></div></div>
+                    <div class="quiz-question" data-question="4"><h4>4. I contributi minimi INPS per la Gestione Separata sono:</h4><div class="quiz-options"><label><input type="radio" name="q4" value="0"> Circa € 4.000 l'anno</label><label><input type="radio" name="q4" value="1"> Non esistono, si paga solo % sul reddito</label><label><input type="radio" name="q4" value="0"> € 2.000 l'anno</label></div></div>
+                    <div class="quiz-question" data-question="5"><h4>5. Le scadenze fiscali principali sono:</h4><div class="quiz-options"><label><input type="radio" name="q5" value="1"> 30 Giugno (saldo + 1° acconto) e 30 Novembre (2° acconto)</label><label><input type="radio" name="q5" value="0"> 31 Luglio e 31 Dicembre</label><label><input type="radio" name="q5" value="0"> Solo 31 Dicembre</label></div></div>
                 </div>
-                <div class="timeline">
-                    <div class="timeline-item">
-                        <div class="timeline-marker"></div>
-                        <div class="timeline-content">
-                            <div class="timeline-date">FASE 1: Avvio (entro 30 giorni)</div>
-                            <div class="timeline-title">Apertura e Iscrizioni Iniziali</div>
-                            <div class="timeline-description">
-                                <ul>
-                                    <li><b>Apertura Partita IVA</b> con Modello AA9/12 e scelta Codice ATECO (es. 47.91.10 per e-commerce).</li>
-                                    <li><b>Iscrizione al Registro Imprese</b> della Camera di Commercio (CCIAA).</li>
-                                    <li><b>Iscrizione alla Gestione Commercianti INPS</b> per i contributi previdenziali.</li>
-                                    <li><b>SCIA</b> (Segnalazione Certificata di Inizio Attività) al Comune di competenza, se necessaria.</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="timeline-item">
-                        <div class="timeline-marker"></div>
-                        <div class="timeline-content">
-                            <div class="timeline-date">FASE 2: Gestione Annuale</div>
-                            <div class="timeline-title">Adempimenti Periodici</div>
-                            <div class="timeline-description">
-                                <ul>
-                                    <li><b>Fatturazione Elettronica:</b> Obbligatoria per tutti (salvo eccezioni specifiche).</li>
-                                    <li><b>Versamenti INPS Fissi:</b> 4 rate annuali (16 Maggio, 20 Agosto, 16 Novembre, 16 Febbraio).</li>
-                                    <li><b>Liquidazioni IVA (solo non forfetari):</b> Mensili o trimestrali.</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="timeline-item">
-                        <div class="timeline-marker"></div>
-                        <div class="timeline-content">
-                            <div class="timeline-date">FASE 3: Scadenze Fiscali</div>
-                            <div class="timeline-title">Pagamento Imposte e Contributi</div>
-                            <div class="timeline-description">
-                                <ul>
-                                    <li><b>Entro 30 Giugno:</b> Pagamento del <b>Saldo</b> (anno prec.) e <b>1° Acconto</b> (anno in corso) per imposte e contributi INPS variabili.</li>
-                                    <li><b>Entro 30 Novembre:</b> Pagamento del <b>2° Acconto</b>.</li>
-                                    <li><b>Dichiarazione dei Redditi:</b> Presentazione del Modello Redditi PF.</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
+                <div style="text-align: center; margin-top: 20px;">
+                    <button id="quiz-btn" style="background: #4b5563; color: white; padding: 10px 20px; border: none; border-radius: 6px; cursor: pointer; font-weight: 500;">Avanti</button>
+                    <div id="quiz-result" style="display: none; margin-top: 15px; padding: 15px; border-radius: 6px;"></div>
                 </div>
             </div>
-
-            <div class="tab-content" id="costs-commercio">
-                 <div class="cost-calculator">
-                    <h3>Stima Costi Fissi Annuali (escluse imposte e contributi variabili)</h3>
-                    <div class="cost-item">
-                        <span>INPS Commercianti (minimale 2025)</span>
-                        <span><strong>€ 4.549,70</strong></span>
-                    </div>
-                    <div class="cost-item">
-                        <span>Diritto Camerale (CCIAA)</span>
-                        <span><strong>~ € 120,00</strong></span>
-                    </div>
-                    <div class="cost-item">
-                        <span>Spese Amministrative
-                        <span class="cost-item-note">Gestione fiscale e fatt. elettronica (forfettario: 1.000€+110€ | semplificato: 2.000€+250€)</span>
-                        </span>
-                        <span><strong>~ € 1.110 - € 2.250</strong></span>
-                    </div>
-                    <div class="cost-item">
-                        <span>PEC e Firma Digitale</span>
-                        <span><strong>~ € 50,00</strong></span>
-                    </div>
-                    <div class="cost-item cost-total">
-                        <span>Totale Costi Fissi Indicativi Annui</span>
-                        <span><strong>~ € 5.830 - € 6.970</strong></span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="tab-content" id="faq-commercio">
-                <div class="faq-item">
-                    <div class="faq-question"><span>Cosa succede se supero i minimali INPS?</span><span class="icon">+</span></div>
-                    <div class="faq-answer"><p>Sul reddito che eccede il minimale di circa 18.500€, pagherai un'aliquota aggiuntiva del 24,48%. Questi contributi si versano con le scadenze di giugno e novembre.</p></div>
-                </div>
-                <div class="faq-item">
-                    <div class="faq-question"><span>Nel forfettario posso avere lo sconto sui contributi?</span><span class="icon">+</span></div>
-                    <div class="faq-answer"><p>Sì, se sei in regime forfettario puoi richiedere all'INPS una riduzione del 35% sui contributi dovuti (sia minimali che eccedenti). Attenzione: verserai meno, ma accumulerai anche meno contributi per la pensione.</p></div>
-                </div>
-                 <div class="faq-item">
-                    <div class="faq-question"><span>Cosa succede se supero 85.000€ ma resto sotto 100.000€?</span><span class="icon">+</span></div>
-                    <div class="faq-answer"><p>Esci dal regime forfettario dall'anno successivo. Se invece superi i 100.000€, esci dal regime forfettario immediatamente e devi applicare l'IVA già dalla fattura che causa il superamento.</p></div>
-                </div>
-                <div class="faq-item">
-                    <div class="faq-question"><span>Un agente di commercio deve iscriversi a ENASARCO?</span><span class="icon">+</span></div>
-                    <div class="faq-answer"><p>Sì, l'iscrizione alla Fondazione ENASARCO è un adempimento specifico e obbligatorio per gli agenti di commercio, in aggiunta all'INPS. Prevede contributi calcolati sulle provvigioni, divisi tra agente e azienda mandante.</p></div>
-                </div>
-            </div>
-        </div>
-        <!-- #endregion -->
-
-        <!-- #region ARTIGIANATO -->
-        <div class="content-area" id="content-artigianato">
-            <div class="tabs">
-                <div class="tab active" data-tab="timeline">📅 Timeline Adempimenti</div>
-                <div class="tab" data-tab="costs">💰 Costi e Tasse</div>
-                <div class="tab" data-tab="faq">❓ FAQ</div>
-            </div>
-
-            <div class="tab-content active" id="timeline-artigianato">
-                <div class="regime-info">
-                    <div class="regime-title">Focus Regime Forfetario</div>
-                    <div class="regime-details">
-                        <div class="regime-detail"><strong>Limite Ricavi</strong> € 85.000 / anno</div>
-                        <div class="regime-detail"><strong>Coefficiente Redditività</strong> Varia (es. 67%)</div>
-                        <div class="regime-detail"><strong>Aliquota Imposta</strong> 15% (o 5% per 5 anni)</div>
-                    </div>
-                </div>
-                <div class="timeline">
-                    <div class="timeline-item">
-                        <div class="timeline-marker"></div>
-                        <div class="timeline-content">
-                            <div class="timeline-date">FASE 1: Avvio (entro 30 giorni)</div>
-                            <div class="timeline-title">Apertura e Iscrizioni Iniziali</div>
-                            <div class="timeline-description">
-                                <ul>
-                                    <li><b>Apertura Partita IVA</b> con Modello AA9/12 e Codice ATECO (es. 96.02.01 per acconciatore).</li>
-                                    <li><b>Iscrizione all'Albo Artigiani</b> presso la Camera di Commercio.</li>
-                                    <li><b>Iscrizione alla Gestione Artigiani INPS</b> per i contributi.</li>
-                                    <li><b>Iscrizione all'INAIL</b> per l'assicurazione obbligatoria contro gli infortuni.</li>
-                                    <li><b>SCIA</b> al Comune ed eventuali certificazioni specifiche (es. idoneità igienico-sanitaria).</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="timeline-item">
-                        <div class="timeline-marker"></div>
-                        <div class="timeline-content">
-                            <div class="timeline-date">FASE 2: Gestione Annuale</div>
-                            <div class="timeline-title">Adempimenti Periodici</div>
-                            <div class="timeline-description">
-                                <ul>
-                                    <li><b>Fatturazione Elettronica:</b> Obbligatoria per tutti.</li>
-                                    <li><b>Versamenti INPS Fissi:</b> 4 rate annuali (16 Maggio, 20 Agosto, 16 Novembre, 16 Febbraio).</li>
-                                    <li><b>Versamento premio INAIL:</b> Scadenza annuale.</li>
-                                    <li><b>Liquidazioni IVA (solo non forfetari):</b> Mensili o trimestrali.</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="timeline-item">
-                        <div class="timeline-marker"></div>
-                        <div class="timeline-content">
-                            <div class="timeline-date">FASE 3: Scadenze Fiscali</div>
-                            <div class="timeline-title">Pagamento Imposte e Contributi</div>
-                            <div class="timeline-description">
-                                <ul>
-                                    <li><b>Entro 30 Giugno:</b> Pagamento del <b>Saldo</b> (anno prec.) e <b>1° Acconto</b> (anno in corso) per imposte e contributi INPS variabili.</li>
-                                    <li><b>Entro 30 Novembre:</b> Pagamento del <b>2° Acconto</b>.</li>
-                                    <li><b>Dichiarazione dei Redditi:</b> Presentazione del Modello Redditi PF.</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="tab-content" id="costs-artigianato">
-                <div class="cost-calculator">
-                    <h3>Stima Costi Fissi Annuali (escluse imposte e contributi variabili)</h3>
-                    <div class="cost-item">
-                        <span>INPS Artigiani (minimale 2025)</span>
-                        <span><strong>€ 4.460,64</strong></span>
-                    </div>
-                    <div class="cost-item">
-                        <span>INAIL (premio annuale indicativo)</span>
-                        <span><strong>~ € 150 - € 400</strong></span>
-                    </div>
-                     <div class="cost-item">
-                        <span>Diritto Camerale (CCIAA)</span>
-                        <span><strong>~ € 120,00</strong></span>
-                    </div>
-                    <div class="cost-item">
-                        <span>Spese Amministrative
-                        <span class="cost-item-note">Gestione fiscale e fatt. elettronica (forfettario: 1.000€+110€ | semplificato: 2.000€+250€)</span>
-                        </span>
-                        <span><strong>~ € 1.110 - € 2.250</strong></span>
-                    </div>
-                    <div class="cost-item">
-                        <span>PEC e Firma Digitale</span>
-                        <span><strong>~ € 50,00</strong></span>
-                    </div>
-                    <div class="cost-item cost-total">
-                        <span>Totale Costi Fissi Indicativi Annui</span>
-                        <span><strong>~ € 5.890 - € 7.280</strong></span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="tab-content" id="faq-artigianato">
-                 <div class="faq-item">
-                    <div class="faq-question"><span>Qual è la differenza principale tra Artigiano e Commerciante?</span><span class="icon">+</span></div>
-                    <div class="faq-answer"><p>L'Artigiano svolge un'attività di produzione di beni o servizi dove il lavoro manuale e personale è prevalente sul capitale. È obbligatoria l'iscrizione all'Albo Artigiani e all'INAIL. Il Commerciante svolge principalmente attività di intermediazione e vendita.</p></div>
-                </div>
-                <div class="faq-item">
-                    <div class="faq-question"><span>L'iscrizione INAIL è sempre obbligatoria?</span><span class="icon">+</span></div>
-                    <div class="faq-answer"><p>Sì, per un artigiano l'iscrizione all'INAIL è obbligatoria per legge, in quanto l'attività manuale comporta un rischio di infortunio. Il premio varia in base alla classe di rischio dell'attività.</p></div>
-                </div>
-            </div>
-        </div>
-        <!-- #endregion -->
-
-        <!-- #region PROFESSIONISTI CASSA -->
-        <div class="content-area" id="content-professionisti-cassa">
-            <div class="tabs">
-                <div class="tab active" data-tab="timeline">📅 Timeline Adempimenti</div>
-                <div class="tab" data-tab="costs">💰 Costi e Tasse</div>
-                <div class="tab" data-tab="faq">❓ FAQ</div>
-            </div>
-
-            <div class="tab-content active" id="timeline-professionisti-cassa">
-                <div class="regime-info">
-                    <div class="regime-title">Focus Regime Forfetario</div>
-                    <div class="regime-details">
-                        <div class="regime-detail"><strong>Limite Ricavi</strong> € 85.000 / anno</div>
-                        <div class="regime-detail"><strong>Coefficiente Redditività</strong> Varia (es. 78%)</div>
-                        <div class="regime-detail"><strong>Aliquota Imposta</strong> 15% (o 5% per 5 anni)</div>
-                    </div>
-                </div>
-                <div class="timeline">
-                     <div class="timeline-item">
-                        <div class="timeline-marker"></div>
-                        <div class="timeline-content">
-                            <div class="timeline-date">FASE 1: Avvio (tempistiche variabili)</div>
-                            <div class="timeline-title">Apertura e Iscrizioni Iniziali</div>
-                            <div class="timeline-description">
-                                <ul>
-                                    <li><b>Iscrizione all'Albo Professionale</b> del proprio Ordine (es. Ordine Architetti).</li>
-                                    <li><b>Apertura Partita IVA</b> con Modello AA9/12 e Codice ATECO specifico (es. 71.11.00 per architetto).</li>
-                                    <li><b>Iscrizione alla Cassa di Previdenza</b> di categoria (es. Inarcassa), obbligatoria.</li>
-                                    <li><b>Stipula Assicurazione RC Professionale:</b> Obbligatoria per legge.</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="timeline-item">
-                        <div class="timeline-marker"></div>
-                        <div class="timeline-content">
-                            <div class="timeline-date">FASE 2: Gestione Annuale</div>
-                            <div class="timeline-title">Adempimenti Periodici</div>
-                            <div class="timeline-description">
-                                <ul>
-                                    <li><b>Fatturazione Elettronica:</b> Obbligatoria.</li>
-                                    <li><b>Versamenti alla Cassa:</b> Le scadenze e le modalità sono definite dai regolamenti della singola Cassa di Previdenza.</li>
-                                    <li><b>Liquidazioni IVA (solo non forfetari):</b> Mensili o trimestrali.</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                     <div class="timeline-item">
-                        <div class="timeline-marker"></div>
-                        <div class="timeline-content">
-                            <div class="timeline-date">FASE 3: Scadenze Fiscali</div>
-                            <div class="timeline-title">Pagamento Imposte e Saldi Contributivi</div>
-                            <div class="timeline-description">
-                                <ul>
-                                    <li><b>Entro 30 Giugno:</b> Pagamento del <b>Saldo</b> (anno prec.) e <b>1° Acconto</b> (anno in corso) per le imposte.</li>
-                                    <li><b>Entro 30 Novembre:</b> Pagamento del <b>2° Acconto</b> per le imposte.</li>
-                                    <li><b>Dichiarazione dei Redditi:</b> Da presentare per calcolare imposte e conguaglio contributivo da versare alla Cassa.</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="tab-content" id="costs-professionisti-cassa">
-                 <div class="cost-calculator">
-                    <h3>Stima Costi Fissi Annuali (es. Architetto - escluse imposte e contributi variabili)</h3>
-                    <div class="cost-item">
-                        <span>Cassa Previdenza (minimo soggettivo)</span>
-                        <span><strong>Variabile (es. ~€ 2.600 per Inarcassa)</strong></span>
-                    </div>
-                    <div class="cost-item">
-                        <span>Quota annuale Albo Professionale</span>
-                        <span><strong>~ € 200 - € 400</strong></span>
-                    </div>
-                    <div class="cost-item">
-                        <span>Assicurazione RC Professionale</span>
-                        <span><strong>~ € 250 - € 500</strong></span>
-                    </div>
-                    <div class="cost-item">
-                        <span>Spese Amministrative
-                        <span class="cost-item-note">Gestione fiscale e fatt. elettronica (forfettario: 1.000€+110€ | semplificato: 2.000€+250€)</span>
-                        </span>
-                        <span><strong>~ € 1.110 - € 2.250</strong></span>
-                    </div>
-                    <div class="cost-item">
-                        <span>PEC e Firma Digitale</span>
-                        <span><strong>~ € 50,00</strong></span>
-                    </div>
-                    <div class="cost-item cost-total">
-                        <span>Totale Costi Fissi Indicativi Annui</span>
-                        <span><strong>~ € 4.210 - € 5.800</strong></span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="tab-content" id="faq-professionisti-cassa">
-                <div class="faq-item">
-                    <div class="faq-question"><span>Devo versare contributi alla cassa anche se non fatturo?</span><span class="icon">+</span></div>
-                    <div class="faq-answer"><p>Sì, quasi tutte le casse professionali prevedono il versamento di un contributo "soggettivo minimo" annuale, indipendentemente dal volume d'affari. Questo garantisce una base pensionistica.</p></div>
-                </div>
-                <div class="faq-item">
-                    <div class="faq-question"><span>Cos'è il contributo integrativo?</span><span class="icon">+</span></div>
-                    <div class="faq-answer"><p>È una percentuale (solitamente 4% o 5%) che il professionista deve addebitare in fattura al cliente e versare alla propria Cassa. Non concorre a formare reddito né volume d'affari IVA.</p></div>
-                </div>
-            </div>
-        </div>
-        <!-- #endregion -->
-        
-        <!-- #region PROFESSIONISTI SEPARATA -->
-        <div class="content-area" id="content-professionisti-separata">
-            <div class="tabs">
-                <div class="tab active" data-tab="timeline">📅 Timeline Adempimenti</div>
-                <div class="tab" data-tab="costs">💰 Costi e Tasse</div>
-                <div class="tab" data-tab="faq">❓ FAQ</div>
-            </div>
-
-            <div class="tab-content active" id="timeline-professionisti-separata">
-                <div class="regime-info">
-                    <div class="regime-title">Focus Regime Forfetario</div>
-                    <div class="regime-details">
-                        <div class="regime-detail"><strong>Limite Ricavi</strong> € 85.000 / anno</div>
-                        <div class="regime-detail"><strong>Coefficiente Redditività</strong> Varia (es. 67%)</div>
-                        <div class="regime-detail"><strong>Aliquota Imposta</strong> 15% (o 5% per 5 anni)</div>
-                    </div>
-                </div>
-                <div class="timeline">
-                     <div class="timeline-item">
-                        <div class="timeline-marker"></div>
-                        <div class="timeline-content">
-                            <div class="timeline-date">FASE 1: Avvio (entro 30 giorni)</div>
-                            <div class="timeline-title">Apertura e Iscrizioni Iniziali</div>
-                            <div class="timeline-description">
-                                <ul>
-                                    <li><b>Apertura Partita IVA</b> con Modello AA9/12 e Codice ATECO corretto (es. 90.03.09 per attività artistiche).</li>
-                                    <li><b>Iscrizione alla Gestione Separata INPS:</b> Obbligatoria per i professionisti senza una cassa autonoma.</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                     <div class="timeline-item">
-                        <div class="timeline-marker"></div>
-                        <div class="timeline-content">
-                            <div class="timeline-date">FASE 2: Gestione Annuale</div>
-                            <div class="timeline-title">Adempimenti Periodici</div>
-                            <div class="timeline-description">
-                                <ul>
-                                    <li><b>Fatturazione Elettronica:</b> Obbligatoria.</li>
-                                    <li><b>Nessun versamento fisso INPS:</b> I contributi si calcolano solo sul reddito e si versano alle scadenze fiscali.</li>
-                                    <li><b>Liquidazioni IVA (solo non forfetari):</b> Mensili o trimestrali.</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="timeline-item">
-                        <div class="timeline-marker"></div>
-                        <div class="timeline-content">
-                            <div class="timeline-date">FASE 3: Scadenze Fiscali</div>
-                            <div class="timeline-title">Pagamento Imposte e Contributi</div>
-                            <div class="timeline-description">
-                                <ul>
-                                    <li><b>Entro 30 Giugno:</b> Pagamento del <b>Saldo</b> (anno prec.) e <b>1° Acconto</b> (anno in corso) per imposte e contributi INPS.</li>
-                                    <li><b>Entro 30 Novembre:</b> Pagamento del <b>2° Acconto</b>.</li>
-                                    <li><b>Dichiarazione dei Redditi:</b> Indispensabile per calcolare il reddito imponibile su cui si basano i contributi.</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="tab-content" id="costs-professionisti-separata">
-                 <div class="cost-calculator">
-                    <h3>Stima Costi Fissi Annuali (escluse imposte e contributi)</h3>
-                     <div class="cost-item">
-                        <span>INPS Gestione Separata</span>
-                        <span><strong>Nessun Minimale - Solo a % sul reddito</strong></span>
-                    </div>
-                    <div class="cost-item">
-                        <span>Spese Amministrative
-                        <span class="cost-item-note">Gestione fiscale e fatt. elettronica (forfettario: 1.000€+110€ | semplificato: 2.000€+250€)</span>
-                        </span>
-                        <span><strong>~ € 1.110 - € 2.250</strong></span>
-                    </div>
-                    <div class="cost-item">
-                        <span>PEC (facoltativa, se non iscritti ad Albi)</span>
-                        <span><strong>~ € 0 - € 30</strong></span>
-                    </div>
-                    <div class="cost-item cost-total">
-                        <span>Totale Costi Fissi Indicativi Annui</span>
-                        <span><strong>~ € 1.110 - € 2.280</strong></span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="tab-content" id="faq-professionisti-separata">
-                <div class="faq-item">
-                    <div class="faq-question"><span>Qual è il grande vantaggio della Gestione Separata?</span><span class="icon">+</span></div>
-                    <div class="faq-answer"><p>Il vantaggio principale è l'assenza di contributi minimali fissi. Se in un anno non fatturi, non devi versare nulla all'INPS. I contributi sono calcolati in percentuale (circa 26,07%) solo sul reddito imponibile che dichiari.</p></div>
-                </div>
-                <div class="faq-item">
-                    <div class="faq-question"><span>Posso applicare la rivalsa INPS del 4% in fattura?</span><span class="icon">+</span></div>
-                    <div class="faq-answer"><p>Sì, i professionisti iscritti alla Gestione Separata possono addebitare in fattura una maggiorazione del 4% a titolo di rivalsa, che concorre a formare il reddito imponibile.</p></div>
-                </div>
-            </div>
-        </div>
-        <!-- #endregion -->
-
-        <!-- Quiz Section -->
-        <div class="quiz-section">
-            <h3 style="text-align: center; margin-bottom: 20px; color: #111827; font-weight: 600;">🎯 Test: Conosci come funziona la tua partita IVA?</h3>
-            <div id="quiz-container">
-                <div class="quiz-question active" data-question="1">
-                    <h4>1. Qual è il limite di ricavi per restare nel regime forfettario?</h4>
-                    <div class="quiz-options">
-                        <label><input type="radio" name="q1" value="0"> € 65.000</label>
-                        <label><input type="radio" name="q1" value="1"> € 85.000</label>
-                        <label><input type="radio" name="q1" value="0"> € 100.000</label>
-                    </div>
-                </div>
-                <div class="quiz-question" data-question="2">
-                    <h4>2. Gli acconti INPS per commercianti si pagano:</h4>
-                    <div class="quiz-options">
-                        <label><input type="radio" name="q2" value="0"> Ogni mese</label>
-                        <label><input type="radio" name="q2" value="1"> 4 rate l'anno (Maggio, Agosto, Novembre, Febbraio)</label>
-                        <label><input type="radio" name="q2" value="0"> Solo a fine anno</label>
-                    </div>
-                </div>
-                <div class="quiz-question" data-question="3">
-                    <h4>3. La fatturazione elettronica è obbligatoria:</h4>
-                    <div class="quiz-options">
-                        <label><input type="radio" name="q3" value="0"> Solo per il regime ordinario</label>
-                        <label><input type="radio" name="q3" value="1"> Per tutti (salvo eccezioni specifiche)</label>
-                        <label><input type="radio" name="q3" value="0"> Solo sopra € 50.000 di fatturato</label>
-                    </div>
-                </div>
-                <div class="quiz-question" data-question="4">
-                    <h4>4. I contributi minimi INPS per la Gestione Separata sono:</h4>
-                    <div class="quiz-options">
-                        <label><input type="radio" name="q4" value="0"> Circa € 4.000 l'anno</label>
-                        <label><input type="radio" name="q4" value="1"> Non esistono, si paga solo % sul reddito</label>
-                        <label><input type="radio" name="q4" value="0"> € 2.000 l'anno</label>
-                    </div>
-                </div>
-                <div class="quiz-question" data-question="5">
-                    <h4>5. Le scadenze fiscali principali sono:</h4>
-                    <div class="quiz-options">
-                        <label><input type="radio" name="q5" value="1"> 30 Giugno (saldo + 1° acconto) e 30 Novembre (2° acconto)</label>
-                        <label><input type="radio" name="q5" value="0"> 31 Luglio e 31 Dicembre</label>
-                        <label><input type="radio" name="q5" value="0"> Solo 31 Dicembre</label>
-                    </div>
-                </div>
-            </div>
-            <div style="text-align: center; margin-top: 20px;">
-                <button id="quiz-btn" onclick="nextQuestion()" style="background: #4b5563; color: white; padding: 10px 20px; border: none; border-radius: 6px; cursor: pointer; font-weight: 500;">Avanti</button>
-                <div id="quiz-result" style="display: none; margin-top: 15px; padding: 15px; border-radius: 6px;"></div>
-            </div>
-        </div>
+        </main>
     </div>
 
     <script>
+        const COEFFICIENTS = {
+            'commercio-dettaglio': 0.40, 'commercio-ambulante-alimenti': 0.40, 'commercio-ambulante-altri': 0.54,
+            'intermediari': 0.62, 'ristorazione': 0.40, 'costruzioni': 0.86, 'professionisti': 0.78, 'altre': 0.67
+        };
+        const INPS_CONST = {
+            commercianti: { minimale: 4549.70, aliquota: 0.2448, redditoMinimale: 18415 },
+            artigiani: { minimale: 4460.64, aliquota: 0.2448, redditoMinimale: 18415 },
+            separata: { aliquota: 0.2607 }
+        };
+        const IRPEF_BRACKETS = [
+            { limit: 28000, rate: 0.23 }, { limit: 50000, rate: 0.35 }, { limit: Infinity, rate: 0.43 }
+        ];
+
+        // Quiz variables
         let currentQuestion = 1;
         let quizScore = 0;
         const totalQuestions = 5;
 
-        document.addEventListener('DOMContentLoaded', function() {
-            // ... (il resto dello script resta identico) ...
-             const categoryCards = document.querySelectorAll('.category-card');
-            const contentAreas = document.querySelectorAll('.content-area');
-            const allTabs = document.querySelectorAll('.tab');
-            const allFaqQuestions = document.querySelectorAll('.faq-question');
+        function createFullContentHTML(category) {
+            const hasInpsReduction = category === 'commercio' || category === 'artigianato';
+            const isCassa = category === 'professionisti-cassa';
+            const isSeparata = category === 'professionisti-separata';
 
-            function switchCategory(category) {
-                categoryCards.forEach(c => c.classList.remove('active'));
-                contentAreas.forEach(c => c.classList.remove('active'));
-                
-                const card = document.querySelector(`.category-card[data-category="${category}"]`);
-                const content = document.getElementById(`content-${category}`);
-
-                if (card) card.classList.add('active');
-                if (content) content.classList.add('active');
+            let forfettarioOptionsHTML = `
+                <div class="input-group">
+                    <label for="coefficiente-${category}">Coefficiente di Redditività (Codice ATECO)</label>
+                    <select id="coefficiente-${category}" onchange="calculate('${category}')">
+                        <option value="0.40">40% - Commercio al dettaglio, ristorazione (45, 47.1-47.7, 10-11, 55-56)</option>
+                        <option value="0.54">54% - Commercio ambulante altri prodotti (47.82-47.89)</option>
+                        <option value="0.62">62% - Intermediari del commercio, agenti (46.1)</option>
+                        <option value="0.86">86% - Costruzioni e attività immobiliari (41-42-43, 68)</option>
+                        <option value="0.78" ${category === 'professionisti-cassa' || category === 'professionisti-separata' ? 'selected' : ''}>78% - Attività professionali, tecniche, sanitarie (64-66, 69-75, 85-88)</option>
+                        <option value="0.67" ${category === 'commercio' || category === 'artigianato' ? 'selected' : ''}>67% - Altre attività economiche</option>
+                    </select>
+                </div>
+                <div class="options-group">
+                    <label><input type="checkbox" id="nuova-attivita-${category}" onchange="calculate('${category}')"> Imposta sostitutiva 5% (primi 5 anni nuova attività)</label>
+                    ${hasInpsReduction ? `<label><input type="checkbox" id="riduzione-inps-${category}" onchange="calculate('${category}')"> Riduzione contributi INPS 35% (forfettario)</label>` : ''}
+                    ${isSeparata ? `<label><input type="checkbox" id="rivalsa-inps-${category}" onchange="calculate('${category}')"> Applico rivalsa INPS 4% ai clienti</label>` : ''}
+                </div>`;
+            
+            if (isCassa) {
+                 forfettarioOptionsHTML = `
+                 <div class="input-group">
+                    <label for="coefficiente-${category}">Coefficiente di Redditività (Codice ATECO)</label>
+                    <select id="coefficiente-${category}" onchange="calculate('${category}')">
+                        <option value="0.78" selected>78% - Attività professionali, tecniche, sanitarie (64-66, 69-75, 85-88)</option>
+                        <option value="0.67">67% - Altre attività economiche</option>
+                    </select>
+                </div>
+                <div class="options-group">
+                    <label><input type="checkbox" id="nuova-attivita-${category}" onchange="calculate('${category}')"> Imposta sostitutiva 5% (primi 5 anni nuova attività)</label>
+                </div>`;
             }
 
-            categoryCards.forEach(card => {
-                card.addEventListener('click', function() {
-                    switchCategory(this.dataset.category);
-                });
-            });
+            const calculatorHTML = `
+                <div class="calculator">
+                    <h3>🧮 Simulatore Tasse e Contributi</h3>
+                    <div class="calculator-grid">
+                        <div class="input-group">
+                            <label for="fatturato-${category}">Ricavi Annui Previsti (€)</label>
+                            <input type="number" id="fatturato-${category}" placeholder="Es: 50000" max="85000" oninput="calculate('${category}')">
+                        </div>
+                        <div class="input-group">
+                            <label for="regime-${category}">Regime Fiscale</label>
+                            <select id="regime-${category}" onchange="calculate('${category}')">
+                                <option value="forfettario">Forfettario (fino €85.000)</option>
+                                <option value="ordinario">Ordinario / Semplificato</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div id="forfettario-options-${category}" class="calculator-grid" style="margin-top:20px;">${forfettarioOptionsHTML}</div>
+                    <div id="ordinario-options-${category}" class="calculator-grid" style="display:none; margin-top:20px;">
+                         <div class="input-group">
+                            <label for="costi-${category}">Costi Annui Deducibili Stimati (€)</label>
+                            <input type="number" id="costi-${category}" placeholder="Es: 15000" oninput="calculate('${category}')">
+                        </div>
+                    </div>
+                     ${isCassa ? `
+                    <div class="calculator-grid" style="margin-top:20px; border-top: 1px solid #e5e7eb; padding-top:20px;">
+                         <div class="input-group">
+                            <label for="cassa-soggettivo-perc-${category}">Aliquota Contributo Soggettivo Cassa (%)</label>
+                            <input type="number" id="cassa-soggettivo-perc-${category}" value="14.5" step="0.1" oninput="calculate('${category}')">
+                        </div>
+                        <div class="input-group">
+                            <label for="cassa-soggettivo-min-${category}">Contributo Soggettivo Minimale Cassa (€)</label>
+                            <input type="number" id="cassa-soggettivo-min-${category}" value="2600" oninput="calculate('${category}')">
+                        </div>
+                    </div>` : ''}
+                    <div id="result-container-${category}" style="display:none; margin-top:20px;">
+                        <div class="result-container">
+                            <div class="result-row"><span>Ricavi / Fatturato</span><span id="res-ricavi-${category}"></span></div>
+                            <div class="result-row" style="color:#e63946"><span>(-) Tasse e Contributi Totali</span><span id="res-costi-totali-${category}"></span></div>
+                            <div class="result-row result-total"><span>(=) Netto Stimato in Tasca</span><span id="res-netto-${category}"></span></div>
+                            <div class="result-row result-row-highlight">
+                                <span><strong>💰 Netto per ogni 100€ di ricavo</strong></span>
+                                <span id="res-netto-percent-${category}"></span>
+                            </div>
+                        </div>
+                        <div id="dettaglio-calcoli-${category}" class="dettaglio-calcoli"></div>
+                    </div>
+                </div>`;
+            
+            const timelineHTML = {
+                commercio: `<div class="timeline"><div class="timeline-item"><div class="timeline-marker"></div><div class="timeline-content"><div class="timeline-date">FASE 1: Avvio (entro 30 giorni)</div><div class="timeline-title">Apertura e Iscrizioni Iniziali</div><div class="timeline-description"><ul><li><b>Apertura Partita IVA</b> con Modello AA9/12 e scelta Codice ATECO (es. 47.91.10 per e-commerce).</li><li><b>Iscrizione al Registro Imprese</b> della Camera di Commercio (CCIAA).</li><li><b>Iscrizione alla Gestione Commercianti INPS</b> per i contributi previdenziali.</li><li><b>SCIA</b> (Segnalazione Certificata di Inizio Attività) al Comune di competenza, se necessaria.</li></ul></div></div></div><div class="timeline-item"><div class="timeline-marker"></div><div class="timeline-content"><div class="timeline-date">FASE 2: Gestione Annuale</div><div class="timeline-title">Adempimenti Periodici</div><div class="timeline-description"><ul><li><b>Fatturazione Elettronica:</b> Obbligatoria per tutti (salvo eccezioni specifiche).</li><li><b>Versamenti INPS Fissi:</b> 4 rate annuali (16 Maggio, 20 Agosto, 16 Novembre, 16 Febbraio).</li><li><b>Liquidazioni IVA (solo non forfetari):</b> Mensili o trimestrali.</li></ul></div></div></div><div class="timeline-item"><div class="timeline-marker"></div><div class="timeline-content"><div class="timeline-date">FASE 3: Scadenze Fiscali</div><div class="timeline-title">Pagamento Imposte e Contributi</div><div class="timeline-description"><ul><li><b>Entro 30 Giugno:</b> Pagamento del <b>Saldo</b> (anno prec.) e <b>1° Acconto</b> (anno in corso) per imposte e contributi INPS variabili.</li><li><b>Entro 30 Novembre:</b> Pagamento del <b>2° Acconto</b>.</li><li><b>Dichiarazione dei Redditi:</b> Presentazione del Modello Redditi PF.</li></ul></div></div></div></div>`,
+                artigianato: `<div class="timeline"><div class="timeline-item"><div class="timeline-marker"></div><div class="timeline-content"><div class="timeline-date">FASE 1: Avvio (entro 30 giorni)</div><div class="timeline-title">Apertura e Iscrizioni Iniziali</div><div class="timeline-description"><ul><li><b>Apertura Partita IVA</b> con Modello AA9/12 e Codice ATECO (es. 96.02.01 per acconciatore).</li><li><b>Iscrizione all'Albo Artigiani</b> presso la Camera di Commercio.</li><li><b>Iscrizione alla Gestione Artigiani INPS</b> per i contributi.</li><li><b>Iscrizione all'INAIL</b> per l'assicurazione obbligatoria contro gli infortuni.</li><li><b>SCIA</b> al Comune ed eventuali certificazioni specifiche (es. idoneità igienico-sanitaria).</li></ul></div></div></div><div class="timeline-item"><div class="timeline-marker"></div><div class="timeline-content"><div class="timeline-date">FASE 2: Gestione Annuale</div><div class="timeline-title">Adempimenti Periodici</div><div class="timeline-description"><ul><li><b>Fatturazione Elettronica:</b> Obbligatoria per tutti.</li><li><b>Versamenti INPS Fissi:</b> 4 rate annuali (16 Maggio, 20 Agosto, 16 Novembre, 16 Febbraio).</li><li><b>Versamento premio INAIL:</b> Scadenza annuale.</li><li><b>Liquidazioni IVA (solo non forfetari):</b> Mensili o trimestrali.</li></ul></div></div></div><div class="timeline-item"><div class="timeline-marker"></div><div class="timeline-content"><div class="timeline-date">FASE 3: Scadenze Fiscali</div><div class="timeline-title">Pagamento Imposte e Contributi</div><div class="timeline-description"><ul><li><b>Entro 30 Giugno:</b> Pagamento del <b>Saldo</b> (anno prec.) e <b>1° Acconto</b> (anno in corso) per imposte e contributi INPS variabili.</li><li><b>Entro 30 Novembre:</b> Pagamento del <b>2° Acconto</b>.</li><li><b>Dichiarazione dei Redditi:</b> Presentazione del Modello Redditi PF.</li></ul></div></div></div></div>`,
+                'professionisti-cassa': `<div class="timeline"><div class="timeline-item"><div class="timeline-marker"></div><div class="timeline-content"><div class="timeline-date">FASE 1: Avvio (tempistiche variabili)</div><div class="timeline-title">Apertura e Iscrizioni Iniziali</div><div class="timeline-description"><ul><li><b>Iscrizione all'Albo Professionale</b> del proprio Ordine (es. Ordine Architetti).</li><li><b>Apertura Partita IVA</b> con Modello AA9/12 e Codice ATECO specifico (es. 71.11.00 per architetto).</li><li><b>Iscrizione alla Cassa di Previdenza</b> di categoria (es. Inarcassa), obbligatoria.</li><li><b>Stipula Assicurazione RC Professionale:</b> Obbligatoria per legge.</li></ul></div></div></div><div class="timeline-item"><div class="timeline-marker"></div><div class="timeline-content"><div class="timeline-date">FASE 2: Gestione Annuale</div><div class="timeline-title">Adempimenti Periodici</div><div class="timeline-description"><ul><li><b>Fatturazione Elettronica:</b> Obbligatoria.</li><li><b>Versamenti alla Cassa:</b> Le scadenze e le modalità sono definite dai regolamenti della singola Cassa di Previdenza.</li><li><b>Liquidazioni IVA (solo non forfetari):</b> Mensili o trimestrali.</li></ul></div></div></div><div class="timeline-item"><div class="timeline-marker"></div><div class="timeline-content"><div class="timeline-date">FASE 3: Scadenze Fiscali</div><div class="timeline-title">Pagamento Imposte e Saldi Contributivi</div><div class="timeline-description"><ul><li><b>Entro 30 Giugno:</b> Pagamento del <b>Saldo</b> (anno prec.) e <b>1° Acconto</b> (anno in corso) per le imposte.</li><li><b>Entro 30 Novembre:</b> Pagamento del <b>2° Acconto</b> per le imposte.</li><li><b>Dichiarazione dei Redditi:</b> Da presentare per calcolare imposte e conguaglio contributivo da versare alla Cassa.</li></ul></div></div></div></div>`,
+                'professionisti-separata': `<div class="timeline"><div class="timeline-item"><div class="timeline-marker"></div><div class="timeline-content"><div class="timeline-date">FASE 1: Avvio (entro 30 giorni)</div><div class="timeline-title">Apertura e Iscrizioni Iniziali</div><div class="timeline-description"><ul><li><b>Apertura Partita IVA</b> con Modello AA9/12 e Codice ATECO corretto (es. 90.03.09 per attività artistiche).</li><li><b>Iscrizione alla Gestione Separata INPS:</b> Obbligatoria per i professionisti senza una cassa autonoma.</li></ul></div></div></div><div class="timeline-item"><div class="timeline-marker"></div><div class="timeline-content"><div class="timeline-date">FASE 2: Gestione Annuale</div><div class="timeline-title">Adempimenti Periodici</div><div class="timeline-description"><ul><li><b>Fatturazione Elettronica:</b> Obbligatoria.</li><li><b>Nessun versamento fisso INPS:</b> I contributi si calcolano solo sul reddito e si versano alle scadenze fiscali.</li><li><b>Liquidazioni IVA (solo non forfetari):</b> Mensili o trimestrali.</li></ul></div></div></div><div class="timeline-item"><div class="timeline-marker"></div><div class="timeline-content"><div class="timeline-date">FASE 3: Scadenze Fiscali</div><div class="timeline-title">Pagamento Imposte e Contributi</div><div class="timeline-description"><ul><li><b>Entro 30 Giugno:</b> Pagamento del <b>Saldo</b> (anno prec.) e <b>1° Acconto</b> (anno in corso) per imposte e contributi INPS.</li><li><b>Entro 30 Novembre:</b> Pagamento del <b>2° Acconto</b>.</li><li><b>Dichiarazione dei Redditi:</b> Indispensabile per calcolare il reddito imponibile su cui si basano i contributi.</li></ul></div></div></div></div>`
+            };
+            const faqHTML = {
+                commercio: `<div class="faq-item"><div class="faq-question"><span>Cosa succede se supero i minimali INPS?</span><span class="icon">+</span></div><div class="faq-answer"><p>Sul reddito che eccede il minimale di circa €18.415, pagherai un'aliquota aggiuntiva del 24,48%. Questi contributi si versano con le scadenze di giugno e novembre.</p></div></div><div class="faq-item"><div class="faq-question"><span>Nel forfettario posso avere lo sconto sui contributi?</span><span class="icon">+</span></div><div class="faq-answer"><p>Sì, se sei in regime forfettario puoi richiedere all'INPS una riduzione del 35% sui contributi dovuti (sia minimali che eccedenti). Attenzione: verserai meno, ma accumulerai anche meno contributi per la pensione.</p></div></div><div class="faq-item"><div class="faq-question"><span>Cosa succede se supero €85.000 ma resto sotto €100.000?</span><span class="icon">+</span></div><div class="faq-answer"><p>Esci dal regime forfettario dall'anno successivo. Se invece superi i €100.000, esci dal regime forfettario immediatamente e devi applicare l'IVA già dalla fattura che causa il superamento.</p></div></div><div class="faq-item"><div class="faq-question"><span>Un agente di commercio deve iscriversi a ENASARCO?</span><span class="icon">+</span></div><div class="faq-answer"><p>Sì, l'iscrizione alla Fondazione ENASARCO è un adempimento specifico e obbligatorio per gli agenti di commercio, in aggiunta all'INPS. Prevede contributi calcolati sulle provvigioni, divisi tra agente e azienda mandante.</p></div></div>`,
+                artigianato: `<div class="faq-item"><div class="faq-question"><span>Qual è la differenza principale tra Artigiano e Commerciante?</span><span class="icon">+</span></div><div class="faq-answer"><p>L'Artigiano svolge un'attività di produzione di beni o servizi dove il lavoro manuale e personale è prevalente sul capitale. È obbligatoria l'iscrizione all'Albo Artigiani e all'INAIL. Il Commerciante svolge principalmente attività di intermediazione e vendita.</p></div></div><div class="faq-item"><div class="faq-question"><span>L'iscrizione INAIL è sempre obbligatoria?</span><span class="icon">+</span></div><div class="faq-answer"><p>Sì, per un artigiano l'iscrizione all'INAIL è obbligatoria per legge, in quanto l'attività manuale comporta un rischio di infortunio. Il premio varia in base alla classe di rischio dell'attività.</p></div></div><div class="faq-item"><div class="faq-question"><span>Posso avere la riduzione INPS del 35%?</span><span class="icon">+</span></div><div class="faq-answer"><p>Sì, se sei in regime forfettario puoi richiedere all'INPS una riduzione del 35% sui contributi dovuti. Questa opzione riduce il versamento ma anche l'accumulo contributivo per la pensione.</p></div></div>`,
+                'professionisti-cassa': `<div class="faq-item"><div class="faq-question"><span>Devo versare contributi alla cassa anche se non fatturo?</span><span class="icon">+</span></div><div class="faq-answer"><p>Sì, quasi tutte le casse professionali prevedono il versamento di un contributo "soggettivo minimo" annuale, indipendentemente dal volume d'affari. Questo garantisce una base pensionistica.</p></div></div><div class="faq-item"><div class="faq-question"><span>Cos'è il contributo integrativo?</span><span class="icon">+</span></div><div class="faq-answer"><p>È una percentuale (solitamente 4% o 5%) che il professionista deve addebitare in fattura al cliente e versare alla propria Cassa. Non concorre a formare reddito né volume d'affari IVA.</p></div></div><div class="faq-item"><div class="faq-question"><span>L'assicurazione RC professionale è obbligatoria?</span><span class="icon">+</span></div><div class="faq-answer"><p>Sì, per la maggior parte delle professioni ordinistiche l'assicurazione di responsabilità civile professionale è obbligatoria per legge. I massimali e le condizioni variano per categoria professionale.</p></div></div>`,
+                'professionisti-separata': `<div class="faq-item"><div class="faq-question"><span>Qual è il grande vantaggio della Gestione Separata?</span><span class="icon">+</span></div><div class="faq-answer"><p>Il vantaggio principale è l'assenza di contributi minimali fissi. Se in un anno non fatturi, non devi versare nulla all'INPS. I contributi sono calcolati in percentuale (circa 26,07%) solo sul reddito imponibile che dichiari.</p></div></div><div class="faq-item"><div class="faq-question"><span>Posso applicare la rivalsa INPS del 4% in fattura?</span><span class="icon">+</span></div><div class="faq-answer"><p>Sì, i professionisti iscritti alla Gestione Separata possono addebitare in fattura una maggiorazione del 4% a titolo di rivalsa, che concorre a formare il reddito imponibile.</p></div></div><div class="faq-item"><div class="faq-question"><span>Devo aprire la Partita IVA anche per collaborazioni occasionali?</span><span class="icon">+</span></div><div class="faq-answer"><p>Non sempre. Fino a €5.000 annui puoi utilizzare prestazioni occasionali senza partita IVA. Oltre questa soglia, o in caso di abitualità, è necessaria l'apertura della partita IVA.</p></div></div>`
+            };
+            
+            return `
+                <div class="tabs">
+                    <div class="tab active" data-tab="calculator">🧮 Calcolatore</div>
+                    <div class="tab" data-tab="timeline">📅 Timeline Adempimenti</div>
+                    <div class="tab" data-tab="faq">❓ FAQ</div>
+                </div>
+                <div class="tab-content active" id="calculator-${category}">${calculatorHTML}</div>
+                <div class="tab-content" id="timeline-${category}">${timelineHTML[category] || ''}</div>
+                <div class="tab-content" id="faq-${category}">${faqHTML[category] || ''}</div>
+            `;
+        }
+        
+        function calculate(category) {
+            const fatturato = parseFloat(document.getElementById(`fatturato-${category}`).value) || 0;
+            const regime = document.getElementById(`regime-${category}`).value;
 
-            allTabs.forEach(tab => {
-                tab.addEventListener('click', function() {
-                    const contentArea = this.closest('.content-area');
-                    const tabName = this.dataset.tab;
-                    
+            document.getElementById(`forfettario-options-${category}`).style.display = regime === 'forfettario' ? 'flex' : 'none';
+            document.getElementById(`ordinario-options-${category}`).style.display = regime === 'ordinario' ? 'flex' : 'none';
+            
+            const resultContainer = document.getElementById(`result-container-${category}`);
+            if (fatturato === 0) { resultContainer.style.display = 'none'; return; }
+            resultContainer.style.display = 'block';
+
+            let imposte = 0, contributi = 0, redditoImponibileLordo = 0;
+            let dettaglio = '<h4>Dettaglio Calcoli</h4>';
+
+            // Gestione rivalsa per gestione separata
+            let fatturatoPiuRivalsa = fatturato;
+            if (category === 'professionisti-separata' && document.getElementById(`rivalsa-inps-${category}`)?.checked) {
+                fatturatoPiuRivalsa = fatturato * 1.04;
+                dettaglio += `<p>Ricavi + rivalsa 4%: ${formatCurrency(fatturato)} + ${formatCurrency(fatturatoPiuRivalsa - fatturato)} = <b>${formatCurrency(fatturatoPiuRivalsa)}</b></p>`;
+            }
+
+            // Step 1: Calcolo Reddito Imponibile LORDO (base per contributi)
+            if (regime === 'forfettario') {
+                const coefficiente = parseFloat(document.getElementById(`coefficiente-${category}`)?.value || 0.67);
+                redditoImponibileLordo = fatturatoPiuRivalsa * coefficiente;
+                dettaglio += `<p>1. Reddito Lordo: ${formatCurrency(fatturatoPiuRivalsa)} × ${(coefficiente * 100)}% = <b>${formatCurrency(redditoImponibileLordo)}</b></p>`;
+            } else { // Ordinario
+                const costiSostenuti = parseFloat(document.getElementById(`costi-${category}`).value) || 0;
+                redditoImponibileLordo = Math.max(0, fatturato - costiSostenuti);
+                dettaglio += `<p>1. Reddito Lordo: ${formatCurrency(fatturato)} - ${formatCurrency(costiSostenuti)} = <b>${formatCurrency(redditoImponibileLordo)}</b></p>`;
+            }
+
+            // Step 2: Calcolo CONTRIBUTI
+            if (category === 'commercio' || category === 'artigianato') {
+                const inpsData = INPS_CONST[category === 'commercio' ? 'commercianti' : 'artigiani'];
+                let inpsMinimi = inpsData.minimale;
+                let inpsEccedenti = redditoImponibileLordo > inpsData.redditoMinimale ? (redditoImponibileLordo - inpsData.redditoMinimale) * inpsData.aliquota : 0;
+                
+                if (document.getElementById(`riduzione-inps-${category}`)?.checked && regime === 'forfettario') {
+                    inpsMinimi *= 0.65; inpsEccedenti *= 0.65;
+                    dettaglio += `<p><i>(Applicata riduzione INPS 35%)</i></p>`;
+                }
+                contributi = inpsMinimi + inpsEccedenti;
+                dettaglio += `<p>2. Contributi INPS: ${formatCurrency(inpsMinimi)} + ${formatCurrency(inpsEccedenti)} = <b>${formatCurrency(contributi)}</b></p>`;
+                
+                // Aggiunge INAIL per artigiani
+                if (category === 'artigianato') {
+                    const inail = 275;
+                    contributi += inail;
+                    dettaglio += `<p>INAIL: <b>${formatCurrency(inail)}</b></p>`;
+                    dettaglio += `<p>Contributi Totali: ${formatCurrency(contributi - inail)} + ${formatCurrency(inail)} = <b>${formatCurrency(contributi)}</b></p>`;
+                }
+            } else if (category === 'professionisti-separata') {
+                 contributi = redditoImponibileLordo * INPS_CONST.separata.aliquota;
+                 dettaglio += `<p>2. Contributi Gest. Separata: ${formatCurrency(redditoImponibileLordo)} × ${(INPS_CONST.separata.aliquota * 100).toFixed(2)}% = <b>${formatCurrency(contributi)}</b></p>`;
+            } else if (category === 'professionisti-cassa') {
+                const aliquotaCassa = (parseFloat(document.getElementById(`cassa-soggettivo-perc-${category}`).value) / 100) || 0.145;
+                const minCassa = parseFloat(document.getElementById(`cassa-soggettivo-min-${category}`).value) || 2600;
+                contributi = Math.max(minCassa, redditoImponibileLordo * aliquotaCassa);
+                dettaglio += `<p>2. Contributi Cassa: Max tra ${formatCurrency(minCassa)} e (${formatCurrency(redditoImponibileLordo)} × ${(aliquotaCassa*100).toFixed(1)}%) = <b>${formatCurrency(contributi)}</b></p>`;
+            }
+            
+            // Step 3: Calcolo Reddito Imponibile FISCALE (netto contributi)
+            const redditoImponibileFiscale = Math.max(0, redditoImponibileLordo - contributi);
+            dettaglio += `<p>3. Reddito Fiscale (netto): ${formatCurrency(redditoImponibileLordo)} - ${formatCurrency(contributi)} = <b>${formatCurrency(redditoImponibileFiscale)}</b></p>`;
+
+            // Step 4: Calcolo IMPOSTE
+            if (regime === 'forfettario') {
+                const isNuovaAttivita = document.getElementById(`nuova-attivita-${category}`).checked;
+                const aliquotaImposta = isNuovaAttivita ? 0.05 : 0.15;
+                imposte = redditoImponibileFiscale * aliquotaImposta;
+                dettaglio += `<p>4. Imposta Sostitutiva: ${formatCurrency(redditoImponibileFiscale)} × ${(aliquotaImposta * 100)}% = <b>${formatCurrency(imposte)}</b></p>`;
+            } else { // Ordinario
+                imposte = calcolaIrpef(redditoImponibileFiscale);
+                dettaglio += `<p>4. Imposta (IRPEF): <b>${formatCurrency(imposte)}</b></p>`;
+            }
+
+            const costiFiscali = imposte + contributi;
+            const costiOperativi = regime === 'ordinario' ? (parseFloat(document.getElementById(`costi-${category}`).value) || 0) : 0;
+            const nettoInTasca = fatturatoPiuRivalsa - costiFiscali - costiOperativi;
+            const nettoPercent = fatturatoPiuRivalsa > 0 ? (nettoInTasca / fatturatoPiuRivalsa) * 100 : 0;
+            
+            document.getElementById(`res-ricavi-${category}`).textContent = formatCurrency(fatturatoPiuRivalsa);
+            document.getElementById(`res-costi-totali-${category}`).textContent = `${formatCurrency(costiFiscali)}`;
+            document.getElementById(`res-netto-${category}`).textContent = formatCurrency(nettoInTasca);
+            document.getElementById(`res-netto-percent-${category}`).textContent = `€${nettoPercent.toFixed(1)} ogni 100€`;
+            document.getElementById(`dettaglio-calcoli-${category}`).innerHTML = `${dettaglio}<p class="disclaimer-note">*Nota: Calcolo semplificato a scopo indicativo. I contributi previdenziali sono considerati interamente deducibili nell'anno di versamento.</p>`;
+        }
+
+        function calcolaIrpef(reddito) {
+            let tax = 0; let remainingReddito = reddito; let lastLimit = 0;
+            for (const bracket of IRPEF_BRACKETS) {
+                if (remainingReddito <= 0) break;
+                const taxableInBracket = Math.min(remainingReddito, bracket.limit - lastLimit);
+                tax += taxableInBracket * bracket.rate;
+                remainingReddito -= taxableInBracket;
+                lastLimit = bracket.limit;
+            }
+            return tax;
+        }
+        
+        function formatCurrency(num) { return `€${num.toFixed(2).replace('.', ',').replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.')}`; }
+        
+        function loadContent(category) {
+            const contentArea = document.getElementById(`content-${category}`);
+            contentArea.innerHTML = createFullContentHTML(category);
+            
+            contentArea.querySelectorAll('.tab').forEach(tab => {
+                tab.addEventListener('click', function(e) {
+                    const tabName = e.target.dataset.tab;
                     contentArea.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+                    e.target.classList.add('active');
                     contentArea.querySelectorAll('.tab-content').forEach(tc => tc.classList.remove('active'));
-                    
-                    this.classList.add('active');
-                    
-                    const targetContent = contentArea.querySelector(`.tab-content[id*="${tabName}"]`);
-                    if (targetContent) {
-                        targetContent.classList.add('active');
-                    }
+                    contentArea.querySelector(`#${tabName}-${category}`).classList.add('active');
                 });
             });
 
-            allFaqQuestions.forEach(question => {
+            addFaqListeners(contentArea);
+            calculate(category); // Initial calculation
+        }
+
+        function addFaqListeners(container) {
+            container.querySelectorAll('.faq-question').forEach(question => {
                 question.addEventListener('click', function() {
                     const answer = this.nextElementSibling;
-                    const isActive = this.classList.contains('active');
-                    this.closest('.tab-content').querySelectorAll('.faq-question').forEach(q => {
-                        q.classList.remove('active');
-                        q.nextElementSibling.classList.remove('active');
-                         q.querySelector('.icon').style.transform = 'rotate(0deg)';
-                    });
-                    if (!isActive) {
-                        this.classList.add('active');
+                    const isActive = answer.classList.contains('active');
+                    // Chiudi tutte le altre risposte
+                    container.querySelectorAll('.faq-answer.active').forEach(a => a.classList.remove('active'));
+                    container.querySelectorAll('.faq-question.active').forEach(q => q.classList.remove('active'));
+                    // Apri/chiudi quella cliccata
+                    if(!isActive) {
                         answer.classList.add('active');
-                        this.querySelector('.icon').style.transform = 'rotate(45deg)';
+                        this.classList.add('active');
                     }
                 });
             });
-
-            if (categoryCards.length > 0) {
-                switchCategory(categoryCards[0].dataset.category);
-            }
-        });
-
+        }
+        
         function nextQuestion() {
+            const quizBtn = document.getElementById('quiz-btn');
+            const resultDiv = document.getElementById('quiz-result');
+            const selectedAnswer = document.querySelector(`input[name="q${currentQuestion}"]:checked`);
+            
+            if (selectedAnswer) {
+                if (selectedAnswer.value === "1") quizScore++;
+            }
+
             if (currentQuestion < totalQuestions) {
-                const selectedAnswer = document.querySelector(`input[name="q${currentQuestion}"]:checked`);
-                if (selectedAnswer && selectedAnswer.value === "1") {
-                    quizScore++;
-                }
                 document.querySelector(`[data-question="${currentQuestion}"]`).classList.remove('active');
                 currentQuestion++;
                 document.querySelector(`[data-question="${currentQuestion}"]`).classList.add('active');
-                if (currentQuestion === totalQuestions) {
-                    document.getElementById('quiz-btn').textContent = 'Vedi Risultato';
-                }
+                if (currentQuestion === totalQuestions) quizBtn.textContent = 'Vedi Risultato';
             } else {
-                const selectedAnswer = document.querySelector(`input[name="q${currentQuestion}"]:checked`);
-                if (selectedAnswer && selectedAnswer.value === "1") {
-                    quizScore++;
-                }
-                showQuizResult();
+                document.getElementById('quiz-container').style.display = 'none';
+                quizBtn.style.display = 'none';
+                resultDiv.style.display = 'block';
+                const percentage = (quizScore / totalQuestions) * 100;
+                let message, bgColor;
+                if (percentage >= 80) { message = `🎉 Eccellente! ${quizScore}/${totalQuestions} (${percentage}%) - Sei molto preparato!`; bgColor = '#dcfce7'; }
+                else if (percentage >= 60) { message = `👍 Buono! ${quizScore}/${totalQuestions} (${percentage}%) - Hai una buona base, rileggi le sezioni.`; bgColor = '#fef9c3'; }
+                else { message = `📚 Da migliorare! ${quizScore}/${totalQuestions} (${percentage}%) - Studia le sezioni qui sotto!`; bgColor = '#fee2e2'; }
+                resultDiv.innerHTML = message;
+                resultDiv.style.backgroundColor = bgColor;
             }
         }
+        
+        document.addEventListener('DOMContentLoaded', function() {
+            document.getElementById('quiz-btn').addEventListener('click', nextQuestion);
 
-        function showQuizResult() {
-            document.getElementById('quiz-container').style.display = 'none';
-            document.getElementById('quiz-btn').style.display = 'none';
-            const resultDiv = document.getElementById('quiz-result');
-            resultDiv.style.display = 'block';
-            const percentage = (quizScore / totalQuestions) * 100;
-            let message, bgColor;
-            if (percentage >= 80) {
-                message = `🎉 Eccellente! ${quizScore}/${totalQuestions} (${percentage}%) - Sei molto preparato!`;
-                bgColor = '#d1fae5';
-            } else if (percentage >= 60) {
-                message = `👍 Buono! ${quizScore}/${totalQuestions} (${percentage}%) - Hai una buona base, rileggi le sezioni.`;
-                bgColor = '#fef3c7';
-            } else {
-                message = `📚 Da migliorare! ${quizScore}/${totalQuestions} (${percentage}%) - Studia le sezioni qui sotto!`;
-                bgColor = '#fee2e2';
-            }
-            resultDiv.innerHTML = message;
-            resultDiv.style.backgroundColor = bgColor;
-        }
+            document.querySelectorAll('.category-card').forEach(card => {
+                card.addEventListener('click', function() {
+                    const category = this.dataset.category;
+                    document.querySelectorAll('.category-card').forEach(c => c.classList.remove('active'));
+                    this.classList.add('active');
+                    document.querySelectorAll('.content-area').forEach(c => c.classList.remove('active'));
+                    const contentArea = document.getElementById(`content-${category}`);
+                    contentArea.classList.add('active');
+                    if (!contentArea.innerHTML.trim()) {
+                        loadContent(category);
+                    }
+                });
+            });
+
+            // Initial load
+            document.querySelector('.category-card').click();
+        });
     </script>
 </body>
 </html>
